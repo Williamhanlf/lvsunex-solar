@@ -4,18 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LVSUNEX SOLAR | Global Premium Solar Freezer & Energy Solutions</title>
-<meta name="description" content="LVSUNEX SOLAR is a leading global manufacturer specializing in premium solar freezers and high-efficiency solar energy solutions. Reliable cooling for a sustainable future.">
-<meta name="keywords" content="LVSUNEX SOLAR, Solar Freezer, Solar Refrigerator, Solar Energy Solutions, Renewable Energy">
+  <meta name="description" content="LVSUNEX SOLAR is a leading global manufacturer specializing in premium solar freezers and high-efficiency solar energy solutions. Reliable cooling for a sustainable future.">
+  <meta name="keywords" content="LVSUNEX SOLAR, Solar Freezer, Solar Refrigerator, Solar Energy Solutions, Renewable Energy">
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-  <link rel="icon" href="favicon.png" type="image/png">
 
   <style>
     :root {
       --primary: #22c55e;
       --primary-dark: #16a34a;
+      --accent-blue: #3b82f6; /* 为基础款新增的科技蓝 */
       --dark: #0f172a;
       --light: #f8fafc;
       --text: #334155;
@@ -76,7 +76,7 @@
       gap: 8px;
     }
 
-    /* --- Hero 视频背景与文字居中修正 --- */
+    /* --- Hero Section --- */
     .hero-slider {
       height: 100vh;
       width: 100%;
@@ -100,24 +100,21 @@
 
     .slide-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%; 
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       z-index: 2;
       background: rgba(0, 0, 0, 0.4);
     }
 
-    /* 核心修改：让标题在视频中央居中 */
     .slide-content {
       position: relative;
       z-index: 3;
       height: 100%;
-      display: flex;            /* 启用弹性布局 */
-      flex-direction: column;   /* 垂直排列 */
-      justify-content: center;  /* 垂直居中 */
-      align-items: center;      /* 水平居中 */
-      text-align: center;       /* 文字对齐居中 */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
       color: var(--white);
     }
 
@@ -126,7 +123,7 @@
       font-weight: 800; 
       line-height: 1.1; 
       margin-bottom: 20px;
-      text-shadow: 2px 2px 15px rgba(0,0,0,0.5); /* 增加投影防止背景亮看不清 */
+      text-shadow: 2px 2px 15px rgba(0,0,0,0.5);
     }
 
     .slide-content p {
@@ -166,8 +163,8 @@
     /* --- Product Grid --- */
     .product-category-title { font-size: 24px; font-weight: 700; margin: 60px 0 30px; padding-left: 20px; border-left: 5px solid var(--primary); display: flex; align-items: center; justify-content: space-between; }
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
-    .product-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: var(--transition); }
-    .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.1); }
+    .product-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: var(--transition); border: 1px solid transparent; }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.1); border-color: var(--primary); }
     
     .product-img-box { height: 250px; background: #fff; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: zoom-in; }
     .product-img-box img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s ease; }
@@ -177,11 +174,13 @@
     .product-info { padding: 20px; }
     .product-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
     .product-specs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-    .spec-item { font-size: 11px; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; color: #475569; }
+    .spec-item { font-size: 11px; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; color: #475569; transition: var(--transition); }
+    .product-card:hover .spec-item { background: var(--primary); color: white; }
+    
     .btn-product { width: 100%; padding: 12px; border: 1px solid var(--primary); color: var(--primary); text-align: center; border-radius: 8px; font-size: 14px; font-weight: 700; display: block; transition: var(--transition); }
     .btn-product:hover { background: var(--primary); color: #fff; }
 
-    /* --- 图片放大 Lightbox --- */
+    /* --- Image Modal --- */
     .img-modal {
       display: none;
       position: fixed;
@@ -284,7 +283,76 @@
       </div>
 
       <div class="product-category-title">
-        Standard DC Solar Freezer
+        Classic Basic DC Solar Freezer
+        <span style="font-size:14px; color:#64748b; font-weight:400">Essential Reliability | Cost-Effective Choice</span>
+      </div>
+
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-img-box" onclick="zoomImage(this)">
+            <span class="badge-tag" style="background:var(--accent-blue)">Basic Choice</span>
+            <img src="./images/159L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=159L+Basic+Freezer'">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">159L Classic Freezer</h3>
+            <div class="product-specs">
+              <span class="spec-item">12V/24V</span>
+              <span class="spec-item">Eco-Compressor</span>
+              <span class="spec-item">Fast Cooling</span>
+            </div>
+            <a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-box" onclick="zoomImage(this)">
+            <img src="./images/209L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=209L+Basic+Freezer'">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">209L Classic Freezer</h3>
+            <div class="product-specs">
+              <span class="spec-item">12V/24V</span>
+              <span class="spec-item">Thick Insulation</span>
+              <span class="spec-item">High Efficiency</span>
+            </div>
+            <a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-box" onclick="zoomImage(this)">
+            <img src="./images/259L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=259L+Basic+Freezer'">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">259L Classic Freezer</h3>
+            <div class="product-specs">
+              <span class="spec-item">12V/24V</span>
+              <span class="spec-item">Large Capacity</span>
+              <span class="spec-item">Off-grid Ready</span>
+            </div>
+            <a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-box" onclick="zoomImage(this)">
+            <span class="badge-tag" style="background:var(--dark)">New Model</span>
+            <img src="./images/309L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=309L+Basic+Freezer'">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">309L Classic Freezer</h3>
+            <div class="product-specs">
+              <span class="spec-item">12V/24V</span>
+              <span class="spec-item">Commercial Grade</span>
+              <span class="spec-item">Top Value</span>
+            </div>
+            <a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-category-title" style="margin-top:80px;">
+        Updated version DC Solar Freezer
         <span style="font-size:14px; color:#64748b; font-weight:400">External 12V/24V Battery Required</span>
       </div>
 
@@ -435,7 +503,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script>
-    var swiper = new Swiper(".mySwiper", { loop: true, autoplay: { delay: 5000 } });
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 50) navbar.classList.add('scrolled');
@@ -451,5 +518,4 @@
     }
   </script>
 </body>
-
 </html>
