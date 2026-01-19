@@ -28,121 +28,36 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--light);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
+    body { font-family: 'Inter', sans-serif; background-color: var(--light); color: var(--text); line-height: 1.6; overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
     img { max-width: 100%; display: block; }
 
     /* --- Navbar --- */
-    .navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 2000;
-      padding: 15px 0;
-      transition: var(--transition);
-      background: rgba(15, 23, 42, 0.9); 
-      backdrop-filter: blur(10px);
-    }
-
-    .navbar.scrolled {
-      background: rgba(15, 23, 42, 0.98);
-      padding: 10px 0;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-
+    .navbar { position: fixed; top: 0; width: 100%; z-index: 2000; padding: 15px 0; transition: var(--transition); background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); }
+    .navbar.scrolled { background: rgba(15, 23, 42, 0.98); padding: 10px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
     .nav-content { display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 24px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 10px; }
     .nav-links { display: flex; gap: 30px; }
     .nav-links a { color: rgba(255,255,255,0.8); font-weight: 500; font-size: 15px; transition: var(--transition); }
     .nav-links a:hover { color: var(--primary); }
-
-    .btn-quote {
-      background: var(--primary);
-      color: #022c22;
-      padding: 10px 24px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 14px;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .btn-quote { background: var(--primary); color: #022c22; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px; }
 
     /* --- Hero Section --- */
-    .hero-slider {
-      height: 100vh;
-      width: 100%;
-      position: relative;
-      overflow: hidden;
-      background: #000;
-    }
-
-    .video-background {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      min-width: 100%; 
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      object-fit: cover;
-      z-index: 1;
-    }
-
-    .slide-overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 2;
-      background: rgba(0, 0, 0, 0.4);
-    }
-
-    .slide-content {
-      position: relative;
-      z-index: 3;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: var(--white);
-    }
-
-    .slide-content h1 { 
-      font-size: 56px; 
-      font-weight: 800; 
-      line-height: 1.1; 
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 15px rgba(0,0,0,0.5);
-    }
-
-    .slide-content p {
-      font-size: 18px;
-      margin-bottom: 30px;
-      text-shadow: 1px 1px 10px rgba(0,0,0,0.5);
-    }
+    .hero-slider { height: 100vh; width: 100%; position: relative; overflow: hidden; background: #000; }
+    .video-background { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 100%; min-height: 100%; object-fit: cover; z-index: 1; }
+    .slide-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; background: rgba(0, 0, 0, 0.4); }
+    .slide-content { position: relative; z-index: 3; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: var(--white); }
+    .slide-content h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; text-shadow: 2px 2px 15px rgba(0,0,0,0.5); }
 
     /* --- Section Styles --- */
     section { padding: 100px 0; }
     .section-header { text-align: center; margin-bottom: 60px; }
     .section-title { font-size: 36px; font-weight: 700; color: var(--dark); margin-bottom: 15px; }
     .section-title span { color: var(--primary); }
-    .section-desc { color: var(--text-light); max-width: 600px; margin: 0 auto; }
 
-    /* --- Why Us Styles --- */
+    /* --- Why Us --- */
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
     .feature-card { background: var(--white); padding: 40px 30px; border-radius: 20px; text-align: center; transition: var(--transition); border: 1px solid rgba(0,0,0,0.03); }
     .feature-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
@@ -153,21 +68,28 @@
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
     .product-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: var(--transition); border: 1px solid transparent; }
     .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.1); border-color: var(--primary); }
-    
     .product-img-box { height: 250px; background: #fff; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: zoom-in; }
-    .product-img-box img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s ease; }
-    
+    .product-img-box img { width: 90%; height: 90%; object-fit: contain; transition: transform 0.3s ease; }
     .badge-tag { position: absolute; top: 15px; left: 15px; background: var(--dark); color: var(--white); font-size: 10px; padding: 4px 10px; border-radius: 20px; font-weight: 600; z-index: 10; }
     .product-info { padding: 20px; }
     .product-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
     .product-specs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-    .spec-item { font-size: 11px; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; color: #475569; transition: var(--transition); }
-    .product-card:hover .spec-item { background: var(--primary); color: white; }
-    
+    .spec-item { font-size: 11px; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; color: #475569; }
     .btn-product { width: 100%; padding: 12px; border: 1px solid var(--primary); color: var(--primary); text-align: center; border-radius: 8px; font-size: 14px; font-weight: 700; display: block; transition: var(--transition); }
     .btn-product:hover { background: var(--primary); color: #fff; }
 
-    /* --- Modal & Float --- */
+    /* --- Feedback Styles --- */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+    .testimonial-card { background: var(--white); padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; }
+    .testimonial-image { width: 100%; height: 220px; overflow: hidden; border-radius: 12px; margin-bottom: 15px; cursor: zoom-in; }
+    .testimonial-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+    .testimonial-image:hover img { transform: scale(1.05); }
+    .stars { color: #f59e0b; margin-bottom: 10px; font-size: 14px; }
+    .testimonial-text { font-style: italic; color: var(--text-light); font-size: 14px; line-height: 1.6; margin-bottom: 15px; }
+    .client-info { display: flex; align-items: center; gap: 12px; }
+    .client-avatar { width: 45px; height: 45px; border-radius: 50%; background: var(--light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 800; border: 1px solid #e2e8f0; }
+
+    /* --- Image Modal --- */
     .img-modal { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; cursor: zoom-out; }
     .img-modal img { max-width: 90%; max-height: 90%; object-fit: contain; animation: zoomAnim 0.3s ease; }
     @keyframes zoomAnim { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -177,6 +99,8 @@
     footer { background: #020617; color: #94a3b8; padding: 80px 0 30px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 60px; }
     .copyright { border-top: 1px solid #1e293b; margin-top: 50px; padding-top: 30px; text-align: center; font-size: 13px; }
+
+    @media (max-width: 768px) { .nav-links { display: none; } .footer-grid { grid-template-columns: 1fr; } .slide-content h1 { font-size: 32px; } }
   </style>
 </head>
 <body>
@@ -188,18 +112,15 @@
         <a href="#home">Home</a>
         <a href="#why-us">Why Us</a>
         <a href="#products">Products</a>
+        <a href="#feedback">Feedback</a>
         <a href="https://wa.me/8613566349436" target="_blank">Contact</a>
       </div>
-      <a href="https://wa.me/8613566349436" class="btn-quote" target="_blank">
-        <i class="fa-brands fa-whatsapp"></i> Get Quote
-      </a>
+      <a href="https://wa.me/8613566349436" class="btn-quote" target="_blank"><i class="fa-brands fa-whatsapp"></i> Get Quote</a>
     </div>
   </nav>
 
   <header id="home" class="hero-slider">
-    <video autoplay muted loop playsinline class="video-background">
-      <source src="images/factory-video.mp4" type="video/mp4">
-    </video>
+    <video autoplay muted loop playsinline class="video-background"><source src="images/factory-video.mp4" type="video/mp4"></video>
     <div class="slide-overlay"></div>
     <div class="container slide-content">
       <h1>Premium DC Solar Freezers for Global Off-Grid Needs</h1>
@@ -211,243 +132,103 @@
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Why <span>LVSUNEX</span>?</h2>
-        <p class="section-desc">Leading manufacturer specializing in DC refrigeration for the world's harshest environments.</p>
       </div>
       <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-industry"></i></div>
-          <h3>Factory Direct</h3>
-          <p>Ningbo based factory. No middleman, ensuring the most competitive global pricing.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-earth-americas"></i></div>
-          <h3>Global Export</h3>
-          <p>Certified products with extensive shipping experience to Africa, Middle East & SE Asia.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-leaf"></i></div>
-          <h3>Eco-Efficient</h3>
-          <p>Advanced DC compressors designed specifically for solar battery systems.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
-          <h3>24/7 Support</h3>
-          <p>Professional technical guidance and spare parts support for every international order.</p>
-        </div>
+        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-industry"></i></div><h3>Factory Direct</h3><p>Ningbo based factory. No middleman pricing.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-earth-americas"></i></div><h3>Global Export</h3><p>Certified products for Africa, Middle East & SE Asia.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-leaf"></i></div><h3>Eco-Efficient</h3><p>Advanced DC compressors for solar systems.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-headset"></i></div><h3>24/7 Support</h3><p>Professional technical guidance for every order.</p></div>
       </div>
     </div>
   </section>
 
   <section id="products" style="background-color: #f1f5f9;">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Our <span>Products</span></h2>
-      </div>
+      <div class="section-header"><h2 class="section-title">Our <span>Products</span></h2></div>
 
-      <div class="product-category-title">
-        Classic Basic DC Solar Freezer
-        <span style="font-size:14px; color:#64748b; font-weight:400">Essential Reliability | Cost-Effective Choice</span>
-      </div>
+      <div class="product-category-title">Classic Basic DC Solar Freezer</div>
       <div class="products-grid">
-        <div class="product-card">
-          <div class="product-img-box" onclick="zoomImage(this)">
-            <span class="badge-tag" style="background:var(--accent-blue)">Basic Choice</span>
-            <img src="./images/159L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=159L+Basic+Freezer'">
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">159L Classic Freezer</h3>
-            <div class="product-specs"><span class="spec-item">12V/24V</span><span class="spec-item">Eco-Compressor</span></div>
-            <a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a>
-          </div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-box" onclick="zoomImage(this)"><img src="./images/209L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=209L+Basic+Freezer'"></div>
-            <div class="product-info"><h3 class="product-title">209L Classic Freezer</h3><div class="product-specs"><span class="spec-item">12V/24V</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-box" onclick="zoomImage(this)"><img src="./images/259L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=259L+Basic+Freezer'"></div>
-            <div class="product-info"><h3 class="product-title">259L Classic Freezer</h3><div class="product-specs"><span class="spec-item">12V/24V</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag" style="background:var(--dark)">New Model</span><img src="./images/309L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=309L+Basic+Freezer'"></div>
-            <div class="product-info"><h3 class="product-title">309L Classic Freezer</h3><div class="product-specs"><span class="spec-item">12V/24V</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag" style="background:var(--accent-blue)">Basic</span><img src="./images/159L.jpg" onerror="this.src='https://placehold.co/400x300?text=159L'"></div><div class="product-info"><h3>159L Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/209L.jpg" onerror="this.src='https://placehold.co/400x300?text=209L'"></div><div class="product-info"><h3>209L Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/259L.jpg" onerror="this.src='https://placehold.co/400x300?text=259L'"></div><div class="product-info"><h3>259L Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag">New</span><img src="./images/309L.jpg" onerror="this.src='https://placehold.co/400x300?text=309L'"></div><div class="product-info"><h3>309L Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
       </div>
 
-      <div class="product-category-title" style="margin-top:80px;">
-        Updated version DC Solar Freezer
-        <span style="font-size:14px; color:#64748b; font-weight:400">100L - 350L Range | High Efficiency</span>
-      </div>
+      <div class="product-category-title" style="margin-top:60px;">Updated Version DC Solar Freezer</div>
       <div class="products-grid">
-        <div class="product-card">
-            <div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag">MOQ: 10</span><img src="./images/100L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=100L+DC+Freezer'"></div>
-            <div class="product-info"><h3 class="product-title">100L DC Freezer</h3><div class="product-specs"><span class="spec-item">12V/24V</span><span class="spec-item">58W</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag" style="background:var(--primary)">Best Seller</span><img src="./images/150L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=150L+DC+Freezer'"></div>
-            <div class="product-info"><h3 class="product-title">150L DC Freezer</h3><div class="product-specs"><span class="spec-item">12V/24V</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-box" onclick="zoomImage(this)"><img src="./images/200L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=200L+DC+Freezer'"></div>
-            <div class="product-info"><h3 class="product-title">200L DC Freezer</h3><div class="product-specs"><span class="spec-item">12V/24V</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-box" onclick="zoomImage(this)"><img src="./images/250L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=250L+DC+Freezer'"></div>
-            <div class="product-info"><h3 class="product-title">250L DC Freezer</h3><div class="product-specs"><span class="spec-item">12V/24V</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag">Commercial</span><img src="./images/300L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=300L+DC+Freezer'"></div>
-            <div class="product-info"><h3 class="product-title">300L DC Freezer</h3><div class="product-specs"><span class="spec-item">12V/24V</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag" style="background:var(--dark)">Max Capacity</span><img src="./images/350L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=350L+DC+Freezer'"></div>
-            <div class="product-info"><h3 class="product-title">350L DC Freezer</h3><div class="product-specs"><span class="spec-item">12V/24V</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/100L.jpg" onerror="this.src='https://placehold.co/400x300?text=100L'"></div><div class="product-info"><h3>100L DC Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag" style="background:var(--primary)">Hot</span><img src="./images/150L.jpg" onerror="this.src='https://placehold.co/400x300?text=150L'"></div><div class="product-info"><h3>150L DC Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/200L.jpg" onerror="this.src='https://placehold.co/400x300?text=200L'"></div><div class="product-info"><h3>200L DC Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/250L.jpg" onerror="this.src='https://placehold.co/400x300?text=250L'"></div><div class="product-info"><h3>250L DC Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/300L.jpg" onerror="this.src='https://placehold.co/400x300?text=300L'"></div><div class="product-info"><h3>300L DC Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/350L.jpg" onerror="this.src='https://placehold.co/400x300?text=350L'"></div><div class="product-info"><h3>350L DC Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
       </div>
 
-      <div class="product-category-title" style="margin-top:80px;">
-        All-in-One Solar Freezer
-        <span style="font-size:14px; color:#64748b; font-weight:400">Plug & Play | Built-in Lithium Battery</span>
-      </div>
+      <div class="product-category-title" style="margin-top:60px;">All-in-One Solar Freezer (Built-in Battery)</div>
       <div class="products-grid">
-        <div class="product-card">
-          <div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio100L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=100L+All-in-One'"></div>
-          <div class="product-info"><h3 class="product-title">100L All-in-One</h3><div class="product-specs"><span class="spec-item">Lithium Battery</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio-150L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=150L+All-in-One'"></div>
-            <div class="product-info"><h3 class="product-title">150L All-in-One</h3><div class="product-specs"><span class="spec-item">Lithium Battery</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
-        <div class="product-card">
-            <div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio-200L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=200L+All-in-One'"></div>
-            <div class="product-info"><h3 class="product-title">200L All-in-One</h3><div class="product-specs"><span class="spec-item">Large Lithium System</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio100L.jpg" onerror="this.src='https://placehold.co/400x300?text=100L+AIO'"></div><div class="product-info"><h3>100L All-in-One</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio-150L.jpg" onerror="this.src='https://placehold.co/400x300?text=150L+AIO'"></div><div class="product-info"><h3>150L All-in-One</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio-200L.jpg" onerror="this.src='https://placehold.co/400x300?text=200L+AIO'"></div><div class="product-info"><h3>200L All-in-One</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
       </div>
 
-      <div class="product-category-title" style="margin-top:80px;">
-         Upright DC Solar Freezer
-        <span style="font-size:14px; color:#64748b; font-weight:400">Space-Saving | Side Door Access</span>
-      </div>
+      <div class="product-category-title" style="margin-top:60px;">Upright DC Solar Freezer</div>
       <div class="products-grid">
-        <div class="product-card">
-          <div class="product-img-box" onclick="zoomImage(this)">
-            <span class="badge-tag" style="background:var(--accent-purple)">Compact Upright</span>
-            <img src="./images/75L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=75L+Upright+Freezer'">
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">75L Upright Freezer</h3>
-            <div class="product-specs"><span class="spec-item">12V/24V</span><span class="spec-item">Single Door</span></div>
-            <a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-img-box" onclick="zoomImage(this)"><img src="./images/180L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=180L+Upright+Freezer'"></div>
-          <div class="product-info"><h3 class="product-title">180L Upright Freezer</h3><div class="product-specs"><span class="spec-item">12V/24V</span><span class="spec-item">Multi-Shelf</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
-        <div class="product-card">
-          <div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag" style="background:var(--primary)">Top Rated</span><img src="./images/198L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=198L+Upright+Freezer'"></div>
-          <div class="product-info"><h3 class="product-title">198L Upright Freezer</h3><div class="product-specs"><span class="spec-item">12V/24V</span><span class="spec-item">Large Storage</span></div><a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a></div>
-        </div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/75L.jpg" onerror="this.src='https://placehold.co/400x300?text=75L+Upright'"></div><div class="product-info"><h3>75L Upright Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/180L.jpg" onerror="this.src='https://placehold.co/400x300?text=180L+Upright'"></div><div class="product-info"><h3>180L Upright Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/198L.jpg" onerror="this.src='https://placehold.co/400x300?text=198L+Upright'"></div><div class="product-info"><h3>198L Upright Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
       </div>
 
-      <div class="product-category-title" style="margin-top:80px;">
-         Solar Refrigerator
-        <span style="font-size:14px; color:#64748b; font-weight:400">Home & Commercial | Top Efficiency</span>
-      </div>
+      <div class="product-category-title" style="margin-top:60px;">Solar Refrigerator</div>
       <div class="products-grid">
-        <div class="product-card">
-          <div class="product-img-box" onclick="zoomImage(this)">
-            <img src="./images/fridge-88L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=88L+Fridge'">
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">88L Solar Refrigerator</h3>
-            <div class="product-specs"><span class="spec-item">12V/24V</span><span class="spec-item">Compact</span></div>
-            <a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-img-box" onclick="zoomImage(this)">
-            <img src="./images/fridge-90L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=90L+Fridge'">
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">90L Solar Refrigerator</h3>
-            <div class="product-specs"><span class="spec-item">12V/24V</span></div>
-            <a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-img-box" onclick="zoomImage(this)">
-            <img src="./images/fridge-105L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=105L+Fridge'">
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">105L Solar Refrigerator</h3>
-            <div class="product-specs"><span class="spec-item">DC Compressor</span></div>
-            <a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-img-box" onclick="zoomImage(this)">
-            <span class="badge-tag" style="background:var(--accent-orange)">Best For Home</span>
-            <img src="./images/fridge-180L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=180L+Fridge'">
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">180L Solar Refrigerator</h3>
-            <div class="product-specs"><span class="spec-item">Double Door</span><span class="spec-item">Low Noise</span></div>
-            <a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-img-box" onclick="zoomImage(this)">
-            <img src="./images/fridge-213L.jpg" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=213L+Fridge'">
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">213L Solar Refrigerator</h3>
-            <div class="product-specs"><span class="spec-item">Family Size</span></div>
-            <a href="https://wa.me/8613566349436" class="btn-product" target="_blank">Inquire Now</a>
-          </div>
-        </div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-88L.jpg" onerror="this.src='https://placehold.co/400x300?text=Fridge+88L'"></div><div class="product-info"><h3>88L Refrigerator</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-90L.jpg" onerror="this.src='https://placehold.co/400x300?text=Fridge+90L'"></div><div class="product-info"><h3>90L Refrigerator</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-105L.jpg" onerror="this.src='https://placehold.co/400x300?text=Fridge+105L'"></div><div class="product-info"><h3>105L Refrigerator</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-180L.jpg" onerror="this.src='https://placehold.co/400x300?text=Fridge+180L'"></div><div class="product-info"><h3>180L Refrigerator</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-213L.jpg" onerror="this.src='https://placehold.co/400x300?text=Fridge+213L'"></div><div class="product-info"><h3>213L Refrigerator</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
       </div>
-
     </div>
   </section>
 
-  <div id="imgModal" class="img-modal" onclick="this.style.display='none'">
-    <img id="modalImg" src="">
-  </div>
-
-  <footer>
+  <section id="feedback">
     <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="logo" style="margin-bottom:20px;">LVSUNEX</div>
-          <p>Trusted off-grid cooling since 2015.</p>
+      <div class="section-header"><h2 class="section-title">Global <span>Feedback</span></h2><p>Real-world solar cooling performance from our clients.</p></div>
+      <div class="testimonials-grid">
+        
+        <div class="testimonial-card">
+          <div class="testimonial-image" onclick="zoomImage(this)"><img src="./images/user-1.jpg" onerror="this.src='https://placehold.co/400x250?text=Dubai+Client+Installation'"></div>
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="testimonial-text">"The efficiency is perfect for our off-grid home in Dubai. Keeps ice frozen easily!"</p>
+          <div class="client-info"><div class="client-avatar">AH</div><div><h4 style="margin:0">Ahmed H.</h4><small>Dubai, UAE 🇦🇪</small></div></div>
         </div>
-        <div>
-          <h4 style="color:white; margin-bottom:20px;">Contact</h4>
-          <p><i class="fa-brands fa-whatsapp"></i> +86 13566349436</p>
-          <p>williamlvsunexsolar@gmail.com</p>
+
+        <div class="testimonial-card">
+          <div class="testimonial-image" onclick="zoomImage(this)"><img src="./images/user-2.jpg" onerror="this.src='https://placehold.co/400x250?text=Nigeria+Shop+Installation'"></div>
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="testimonial-text">"LVSUNEX 309L is a beast for my grocery shop in Lagos. Great value and service."</p>
+          <div class="client-info"><div class="client-avatar">KO</div><div><h4 style="margin:0">Kingsley O.</h4><small>Lagos, Nigeria 🇳🇬</small></div></div>
         </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-image" onclick="zoomImage(this)"><img src="./images/user-3.jpg" onerror="this.src='https://placehold.co/400x250?text=Kenya+Farm+Installation'"></div>
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="testimonial-text">"Very satisfied with the freezer design. Saves space and the compressor is so quiet."</p>
+          <div class="client-info"><div class="client-avatar">SK</div><div><h4 style="margin:0">Samuel K.</h4><small>Nairobi, Kenya 🇰🇪</small></div></div>
+        </div>
+
       </div>
-      <div class="copyright">&copy; 2026 LVSUNEX Solar. All Rights Reserved.</div>
     </div>
-  </footer>
+  </section>
+
+  <div id="imgModal" class="img-modal" onclick="this.style.display='none'"><img id="modalImg" src=""></div>
+  
+  <footer><div class="container"><div class="footer-grid"><div><div class="logo">LVSUNEX</div><p>Trusted off-grid cooling since 2015.</p></div><div><h4>Contact</h4><p><i class="fa-brands fa-whatsapp"></i> +86 13566349436</p><p>williamlvsunexsolar@gmail.com</p></div></div><div class="copyright">&copy; 2026 LVSUNEX Solar. All Rights Reserved.</div></div></footer>
 
   <a href="https://wa.me/8613566349436" class="whatsapp-float" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
   <script>
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) navbar.classList.add('scrolled');
-      else navbar.classList.remove('scrolled');
-    });
-
-    function zoomImage(container) {
-      const img = container.querySelector('img');
-      const modal = document.getElementById('imgModal');
-      const modalImg = document.getElementById('modalImg');
-      modal.style.display = "flex";
-      modalImg.src = img.src;
-    }
+    window.addEventListener('scroll', () => { if (window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); });
+    function zoomImage(container) { const img = container.querySelector('img'); const modal = document.getElementById('imgModal'); const modalImg = document.getElementById('modalImg'); modal.style.display = "flex"; modalImg.src = img.src; }
   </script>
 </body>
 </html>
