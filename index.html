@@ -1,106 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" href="favicon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LVSUNEX SOLAR | Global Premium Solar Freezer & Refrigerator Solutions</title>
-  <meta name="description" content="LVSUNEX SOLAR is a leading global manufacturer specializing in premium solar freezers and high-efficiency solar energy solutions. Reliable cooling for a sustainable future.">
-  <meta name="keywords" content="LVSUNEX SOLAR, Solar Freezer, Solar Refrigerator, Solar Energy Solutions, Renewable Energy">
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="LVSUNEX SOLAR is a leading global manufacturer specializing in premium solar freezers.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-
+  
   <style>
     :root {
       --primary: #22c55e;
       --primary-dark: #16a34a;
-      --accent-blue: #3b82f6; 
-      --accent-purple: #8b5cf6; 
-      --accent-orange: #f97316; 
       --dark: #0f172a;
       --light: #f8fafc;
       --text: #334155;
       --text-light: #64748b;
       --white: #ffffff;
-      --transition: all 0.3s ease;
+      --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    html { scroll-behavior: smooth; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', sans-serif; background-color: var(--light); color: var(--text); line-height: 1.6; overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
-    img { max-width: 100%; display: block; }
 
     /* --- Navbar --- */
-    .navbar { position: fixed; top: 0; width: 100%; z-index: 2000; padding: 15px 0; transition: var(--transition); background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); }
-    .navbar.scrolled { background: rgba(15, 23, 42, 0.98); padding: 10px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    .navbar { position: fixed; top: 0; width: 100%; z-index: 2000; padding: 18px 0; transition: var(--transition); background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .navbar.scrolled { background: rgba(15, 23, 42, 0.98); padding: 12px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
     .nav-content { display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 24px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 10px; }
     .nav-links { display: flex; gap: 30px; }
-    .nav-links a { color: rgba(255,255,255,0.8); font-weight: 500; font-size: 15px; transition: var(--transition); }
+    .nav-links a { color: rgba(255,255,255,0.8); font-weight: 500; font-size: 14px; transition: 0.3s; }
     .nav-links a:hover { color: var(--primary); }
     .btn-quote { background: var(--primary); color: #022c22; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; transition: var(--transition); display: inline-flex; align-items: center; gap: 8px; }
 
-    /* --- Hero Section --- */
-    .hero-slider { height: 100vh; width: 100%; position: relative; overflow: hidden; background: #000; }
-    .video-background { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 100%; min-height: 100%; object-fit: cover; z-index: 1; }
-    .slide-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; background: rgba(0, 0, 0, 0.4); }
-    .slide-content { position: relative; z-index: 3; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: var(--white); }
-    .slide-content h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; text-shadow: 2px 2px 15px rgba(0,0,0,0.5); }
+    /* --- Hero Slider (优化高度 75vh) --- */
+    .hero-slider { height: 75vh; width: 100%; position: relative; overflow: hidden; background: #000; }
+    .hero-images { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+    .hero-img { 
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+      object-fit: cover; object-position: center; opacity: 0; transition: opacity 0.8s ease-in-out; 
+      transform: scale(1.05);
+    }
+    .hero-img.active { opacity: 0.65; transform: scale(1); animation: kenBurns 6s linear forwards; }
+    @keyframes kenBurns { to { transform: scale(1.15); } }
 
-    /* --- Section Styles --- */
+    .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(255,255,255,0.1); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(5px); transition: 0.3s; }
+    .slider-arrow:hover { background: var(--primary); color: #000; }
+    .arrow-left { left: 30px; }
+    .arrow-right { right: 30px; }
+
+    .slider-dots { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 10px; }
+    .dot { width: 12px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px; cursor: pointer; transition: 0.3s; }
+    .dot.active { background: var(--primary); width: 30px; }
+
+    .slide-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8)); }
+    .slide-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; text-align: center; color: var(--white); width: 100%; padding: 0 20px; pointer-events: none; }
+    .slide-content h1 { font-size: clamp(30px, 5vw, 60px); font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; line-height: 1.2; }
+
+    /* --- 核心动画类 --- */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform, opacity; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* --- Sections --- */
     section { padding: 100px 0; }
     .section-header { text-align: center; margin-bottom: 60px; }
-    .section-title { font-size: 36px; font-weight: 700; color: var(--dark); margin-bottom: 15px; }
+    .section-title { font-size: 38px; font-weight: 800; color: var(--dark); letter-spacing: -1px; }
     .section-title span { color: var(--primary); }
 
     /* --- Why Us --- */
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-    .feature-card { background: var(--white); padding: 40px 30px; border-radius: 20px; text-align: center; transition: var(--transition); border: 1px solid rgba(0,0,0,0.03); }
-    .feature-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-    .feature-icon { width: 70px; height: 70px; background: rgba(34, 197, 94, 0.1); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 20px; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
+    .feature-card { background: var(--white); padding: 50px 35px; border-radius: 24px; text-align: center; transition: var(--transition); border: 1px solid rgba(0,0,0,0.04); }
+    .feature-card:hover { transform: translateY(-12px); border-color: var(--primary); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); }
+    .feature-icon { width: 75px; height: 75px; background: rgba(34, 197, 94, 0.08); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; margin: 0 auto 25px; }
 
-    /* --- Product Grid --- */
-    .product-category-title { font-size: 24px; font-weight: 700; margin: 60px 0 30px; padding-left: 20px; border-left: 5px solid var(--primary); display: flex; align-items: center; justify-content: space-between; }
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
-    .product-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: var(--transition); border: 1px solid transparent; }
-    .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.1); border-color: var(--primary); }
-    .product-img-box { height: 250px; background: #fff; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: zoom-in; }
-    .product-img-box img { width: 90%; height: 90%; object-fit: contain; transition: transform 0.3s ease; }
-    .badge-tag { position: absolute; top: 15px; left: 15px; background: var(--dark); color: var(--white); font-size: 10px; padding: 4px 10px; border-radius: 20px; font-weight: 600; z-index: 10; }
-    .product-info { padding: 20px; }
-    .product-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
-    .product-specs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-    .spec-item { font-size: 11px; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; color: #475569; }
-    .btn-product { width: 100%; padding: 12px; border: 1px solid var(--primary); color: var(--primary); text-align: center; border-radius: 8px; font-size: 14px; font-weight: 700; display: block; transition: var(--transition); }
+    /* --- Products --- */
+    .product-category-title { font-size: 24px; font-weight: 700; margin: 80px 0 35px; padding-left: 20px; border-left: 4px solid var(--primary); color: var(--dark); }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+    .product-card { background: var(--white); border-radius: 24px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.03); transition: var(--transition); border: 1px solid rgba(0,0,0,0.02); display: flex; flex-direction: column; }
+    .product-card:hover { transform: translateY(-10px); box-shadow: 0 30px 40px -15px rgba(0,0,0,0.12); border-color: var(--primary); }
+    .product-img-box { width: 100%; aspect-ratio: 1/1; background: #fff; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: zoom-in; padding: 25px; }
+    .product-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    
+    .badge-tag { position: absolute; top: 15px; left: 15px; font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 5px 14px; border-radius: 50px; z-index: 10; backdrop-filter: blur(8px); letter-spacing: 0.5px; }
+    .tag-hot { background: rgba(239, 68, 68, 0.9); color: white; }
+    .tag-classic { background: rgba(59, 130, 246, 0.1); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.2); }
+
+    .product-info { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+    .product-title { font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+    .product-spec-summary { font-size: 13px; color: var(--text-light); margin-bottom: 20px; }
+    .btn-product { width: 100%; padding: 14px; border: 1.5px solid var(--primary); color: var(--primary); text-align: center; border-radius: 12px; font-size: 14px; font-weight: 700; transition: 0.3s; margin-top: auto; }
     .btn-product:hover { background: var(--primary); color: #fff; }
 
-    /* --- Feedback Styles --- */
+    /* --- Certifications (新功能：自动滚动) --- */
+    .cert-scroll-container { width: 100%; overflow: hidden; background: #fff; padding: 40px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+    .cert-wrapper { display: flex; width: calc(250px * 8); animation: scrollCert 20s linear infinite; }
+    .cert-wrapper:hover { animation-play-state: paused; }
+    .cert-slide { width: 250px; padding: 0 20px; flex-shrink: 0; text-align: center; }
+    .cert-slide img { max-width: 100%; height: 160px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: 0.3s; border: 1px solid #eee; padding: 10px; border-radius: 8px; }
+    .cert-slide img:hover { filter: grayscale(0%); opacity: 1; border-color: var(--primary); }
+    @keyframes scrollCert { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-250px * 4)); } }
+
+    /* --- Feedback --- */
     .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-    .testimonial-card { background: var(--white); padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; }
-    .testimonial-image { width: 100%; height: 220px; overflow: hidden; border-radius: 12px; margin-bottom: 15px; cursor: zoom-in; }
-    .testimonial-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-    .testimonial-image:hover img { transform: scale(1.05); }
-    .stars { color: #f59e0b; margin-bottom: 10px; font-size: 14px; }
-    .testimonial-text { font-style: italic; color: var(--text-light); font-size: 14px; line-height: 1.6; margin-bottom: 15px; }
-    .client-info { display: flex; align-items: center; gap: 12px; }
-    .client-avatar { width: 45px; height: 45px; border-radius: 50%; background: var(--light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 800; border: 1px solid #e2e8f0; }
+    .testimonial-card { background: var(--white); padding: 30px; border-radius: 24px; border: 1px solid rgba(0,0,0,0.03); }
+    .testimonial-image { width: 100%; aspect-ratio: 16/10; overflow: hidden; border-radius: 16px; margin-bottom: 20px; cursor: zoom-in; }
+    .testimonial-image img { width: 100%; height: 100%; object-fit: cover; }
+    .stars { color: #f59e0b; margin-bottom: 12px; font-size: 14px; }
+    .testimonial-text { font-style: italic; color: var(--text-light); font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+    .client-info { display: flex; align-items: center; gap: 15px; }
+    .client-avatar { width: 50px; height: 50px; border-radius: 50%; background: #f1f5f9; color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 800; border: 1px solid #e2e8f0; }
 
-    /* --- Image Modal --- */
-    .img-modal { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; cursor: zoom-out; }
-    .img-modal img { max-width: 90%; max-height: 90%; object-fit: contain; animation: zoomAnim 0.3s ease; }
-    @keyframes zoomAnim { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    /* --- Components --- */
+    .img-modal { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.95); align-items: center; justify-content: center; cursor: zoom-out; backdrop-filter: blur(10px); }
+    .img-modal img { max-width: 90%; max-height: 90%; object-fit: contain; animation: zoomAnim 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes zoomAnim { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 3000; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3); transition: 0.3s; }
 
-    .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 3000; transition: var(--transition); }
-    
-    footer { background: #020617; color: #94a3b8; padding: 80px 0 30px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 60px; }
-    .copyright { border-top: 1px solid #1e293b; margin-top: 50px; padding-top: 30px; text-align: center; font-size: 13px; }
+    footer { background: #020617; color: rgba(255,255,255,0.5); padding: 80px 0 40px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; }
+    .copyright { border-top: 1px solid rgba(255,255,255,0.05); margin-top: 60px; padding-top: 40px; text-align: center; font-size: 13px; }
 
-    @media (max-width: 768px) { .nav-links { display: none; } .footer-grid { grid-template-columns: 1fr; } .slide-content h1 { font-size: 32px; } }
+    @media (max-width: 768px) { .nav-links { display: none; } .footer-grid { grid-template-columns: 1fr; } .hero-slider { height: 60vh; } }
   </style>
 </head>
 <body>
@@ -109,126 +133,202 @@
     <div class="container nav-content">
       <div class="logo"><i class="fa-solid fa-solar-panel" style="color:var(--primary)"></i> LVSUNEX</div>
       <div class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#why-us">Why Us</a>
-        <a href="#products">Products</a>
-        <a href="#feedback">Feedback</a>
-        <a href="https://wa.me/8613566349436" target="_blank">Contact</a>
+        <a href="#home">Home</a><a href="#why-us">Why Us</a><a href="#products">Products</a><a href="#feedback">Feedback</a>
       </div>
       <a href="https://wa.me/8613566349436" class="btn-quote" target="_blank"><i class="fa-brands fa-whatsapp"></i> Get Quote</a>
     </div>
   </nav>
 
   <header id="home" class="hero-slider">
-    <video autoplay muted loop playsinline class="video-background"><source src="images/factory-video.mp4" type="video/mp4"></video>
+    <div class="hero-images">
+      <img src="images/banner-1.jpg" class="hero-img active" onerror="this.src='https://placehold.co/1920x1080?text=Premium+Solar+Cooling+1'">
+      <img src="images/banner-2.jpg" class="hero-img" onerror="this.src='https://placehold.co/1920x1080?text=Industrial+DC+Technology+2'">
+      <img src="images/banner-3.jpg" class="hero-img" onerror="this.src='https://placehold.co/1920x1080?text=Off-Grid+Solutions+3'">
+      <img src="images/banner-4.jpg" class="hero-img" onerror="this.src='https://placehold.co/1920x1080?text=Global+Export+Expert+4'">
+    </div>
+    <button class="slider-arrow arrow-left" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+    <button class="slider-arrow arrow-right" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+    <div class="slider-dots" id="sliderDots"></div>
     <div class="slide-overlay"></div>
     <div class="container slide-content">
-      <h1>Premium DC Solar Freezers for Global Off-Grid Needs</h1>
-      <p>High-efficiency cooling solutions for businesses worldwide.</p>
+      <h1 class="reveal">Premium DC Solar Freezers</h1>
+      <p class="reveal" style="font-size: 1.1rem; opacity: 0.9; font-weight: 300; margin-top: 10px;">Industrial-grade cooling for off-grid excellence since 2015.</p>
     </div>
   </header>
 
   <section id="why-us">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Why <span>LVSUNEX</span>?</h2>
-      </div>
+      <div class="section-header"><h2 class="section-title reveal">Why Choose <span>LVSUNEX</span>?</h2></div>
       <div class="features-grid">
-        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-industry"></i></div><h3>Factory Direct</h3><p>Ningbo based factory. No middleman pricing.</p></div>
-        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-earth-americas"></i></div><h3>Global Export</h3><p>Certified products for Africa, Middle East & SE Asia.</p></div>
-        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-leaf"></i></div><h3>Eco-Efficient</h3><p>Advanced DC compressors for solar systems.</p></div>
-        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-headset"></i></div><h3>24/7 Support</h3><p>Professional technical guidance for every order.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon"><i class="fa-solid fa-industry"></i></div><h3>Factory Direct</h3><p>Ningbo based facility. No middleman pricing.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon"><i class="fa-solid fa-earth-americas"></i></div><h3>Global Export</h3><p>Certified products for Africa, Middle East & SE Asia.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon"><i class="fa-solid fa-leaf"></i></div><h3>Eco-Efficient</h3><p>Advanced DC compressors for solar systems.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon"><i class="fa-solid fa-headset"></i></div><h3>24/7 Support</h3><p>Professional technical guidance for every order.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="products" style="background-color: #f1f5f9;">
+  <section id="products" style="background-color: #f8fafc;">
     <div class="container">
-      <div class="section-header"><h2 class="section-title">Our <span>Products</span></h2></div>
+      <div class="section-header"><h2 class="section-title reveal">Our <span>Solutions</span></h2></div>
 
-      <div class="product-category-title">Classic Basic DC Solar Freezer</div>
+      <div class="product-category-title reveal">Classic Basic DC Solar Freezer</div>
       <div class="products-grid">
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag" style="background:var(--accent-blue)">Basic</span><img src="./images/159L.jpg" onerror="this.src='https://placehold.co/400x300?text=159L'"></div><div class="product-info"><h3>159L Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/209L.jpg" onerror="this.src='https://placehold.co/400x300?text=209L'"></div><div class="product-info"><h3>209L Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/259L.jpg" onerror="this.src='https://placehold.co/400x300?text=259L'"></div><div class="product-info"><h3>259L Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag">New</span><img src="./images/309L.jpg" onerror="this.src='https://placehold.co/400x300?text=309L'"></div><div class="product-info"><h3>309L Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag tag-classic">Essential</span><img src="./images/159L.jpg"></div><div class="product-info"><h3>159L Freezer</h3><p class="product-spec-summary">DC 12V/24V | -18℃ Cooling | Top Door</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/209L.jpg"></div><div class="product-info"><h3>209L Freezer</h3><p class="product-spec-summary">Off-Grid Ready | High Insulation</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/259L.jpg"></div><div class="product-info"><h3>259L Freezer</h3><p class="product-spec-summary">Commercial Grade | Silent Compressor</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/309L.jpg"></div><div class="product-info"><h3>309L Freezer</h3><p class="product-spec-summary">Max Storage | Digital Display</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
       </div>
 
-      <div class="product-category-title" style="margin-top:60px;">Updated Version DC Solar Freezer</div>
+      <div class="product-category-title reveal" style="margin-top:60px;">Updated Version DC Solar Freezer</div>
       <div class="products-grid">
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/100L.jpg" onerror="this.src='https://placehold.co/400x300?text=100L'"></div><div class="product-info"><h3>100L DC Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag" style="background:var(--primary)">Hot</span><img src="./images/150L.jpg" onerror="this.src='https://placehold.co/400x300?text=150L'"></div><div class="product-info"><h3>150L DC Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/200L.jpg" onerror="this.src='https://placehold.co/400x300?text=200L'"></div><div class="product-info"><h3>200L DC Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/250L.jpg" onerror="this.src='https://placehold.co/400x300?text=250L'"></div><div class="product-info"><h3>250L DC Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/300L.jpg" onerror="this.src='https://placehold.co/400x300?text=300L'"></div><div class="product-info"><h3>300L DC Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/350L.jpg" onerror="this.src='https://placehold.co/400x300?text=350L'"></div><div class="product-info"><h3>350L DC Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/100L.jpg"></div><div class="product-info"><h3>100L DC Freezer</h3><p class="product-spec-summary">Compact Efficiency</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><span class="badge-tag tag-hot">Best Seller</span><img src="./images/150L.jpg"></div><div class="product-info"><h3>150L DC Freezer</h3><p class="product-spec-summary">Top Selling Model</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/200L.jpg"></div><div class="product-info"><h3>200L DC Freezer</h3><p class="product-spec-summary">Stable Cooling</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/250L.jpg"></div><div class="product-info"><h3>250L DC Freezer</h3><p class="product-spec-summary">Solar Optimized</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/300L.jpg"></div><div class="product-info"><h3>300L DC Freezer</h3><p class="product-spec-summary">Spacious Interior</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/350L.jpg"></div><div class="product-info"><h3>350L DC Freezer</h3><p class="product-spec-summary">High Capacity</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
       </div>
 
-      <div class="product-category-title" style="margin-top:60px;">All-in-One Solar Freezer (Built-in Battery)</div>
+      <div class="product-category-title reveal" style="margin-top:60px;">All-in-One Solar (Built-in Battery)</div>
       <div class="products-grid">
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio100L.jpg" onerror="this.src='https://placehold.co/400x300?text=100L+AIO'"></div><div class="product-info"><h3>100L All-in-One</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio-150L.jpg" onerror="this.src='https://placehold.co/400x300?text=150L+AIO'"></div><div class="product-info"><h3>150L All-in-One</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio-200L.jpg" onerror="this.src='https://placehold.co/400x300?text=200L+AIO'"></div><div class="product-info"><h3>200L All-in-One</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio100L.jpg"></div><div class="product-info"><h3>100L All-in-One</h3><p class="product-spec-summary">Plug & Play Solution</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio-150L.jpg"></div><div class="product-info"><h3>150L All-in-One</h3><p class="product-spec-summary">Integrated Battery</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio-200L.jpg"></div><div class="product-info"><h3>200L All-in-One</h3><p class="product-spec-summary">High Autonomy</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
       </div>
 
-      <div class="product-category-title" style="margin-top:60px;">Upright DC Solar Freezer</div>
+      <div class="product-category-title reveal" style="margin-top:60px;">Upright DC Solar Freezer</div>
       <div class="products-grid">
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/75L.jpg" onerror="this.src='https://placehold.co/400x300?text=75L+Upright'"></div><div class="product-info"><h3>75L Upright Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/180L.jpg" onerror="this.src='https://placehold.co/400x300?text=180L+Upright'"></div><div class="product-info"><h3>180L Upright Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/198L.jpg" onerror="this.src='https://placehold.co/400x300?text=198L+Upright'"></div><div class="product-info"><h3>198L Upright Freezer</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/75L.jpg"></div><div class="product-info"><h3>75L Upright</h3><p class="product-spec-summary">Vertical Storage</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/180L.jpg"></div><div class="product-info"><h3>180L Upright</h3><p class="product-spec-summary">Multi-Layer Shelf</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/198L.jpg"></div><div class="product-info"><h3>198L Upright</h3><p class="product-spec-summary">Space Efficient</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
       </div>
 
-      <div class="product-category-title" style="margin-top:60px;">Solar Refrigerator</div>
+      <div class="product-category-title reveal" style="margin-top:60px;">Solar Refrigerator</div>
       <div class="products-grid">
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-88L.jpg" onerror="this.src='https://placehold.co/400x300?text=Fridge+88L'"></div><div class="product-info"><h3>88L Refrigerator</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-90L.jpg" onerror="this.src='https://placehold.co/400x300?text=Fridge+90L'"></div><div class="product-info"><h3>90L Refrigerator</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-105L.jpg" onerror="this.src='https://placehold.co/400x300?text=Fridge+105L'"></div><div class="product-info"><h3>105L Refrigerator</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-180L.jpg" onerror="this.src='https://placehold.co/400x300?text=Fridge+180L'"></div><div class="product-info"><h3>180L Refrigerator</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-        <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-213L.jpg" onerror="this.src='https://placehold.co/400x300?text=Fridge+213L'"></div><div class="product-info"><h3>213L Refrigerator</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-88L.jpg"></div><div class="product-info"><h3>88L Fridge</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-90L.jpg"></div><div class="product-info"><h3>90L Fridge</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-105L.jpg"></div><div class="product-info"><h3>105L Fridge</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-180L.jpg"></div><div class="product-info"><h3>180L Fridge</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+        <div class="product-card reveal"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-213L.jpg"></div><div class="product-info"><h3>213L Fridge</h3><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="container">
+      <div class="section-header"><h2 class="section-title reveal">Factory <span>Certifications</span></h2></div>
+      <div class="cert-scroll-container">
+        <div class="cert-wrapper">
+          <div class="cert-slide"><img src="images/cert-1.jpg" onerror="this.src='https://placehold.co/200x280?text=CE+Cert'"></div>
+          <div class="cert-slide"><img src="images/cert-2.jpg" onerror="this.src='https://placehold.co/200x280?text=ISO+Cert'"></div>
+          <div class="cert-slide"><img src="images/cert-3.jpg" onerror="this.src='https://placehold.co/200x280?text=RoHS+Cert'"></div>
+          <div class="cert-slide"><img src="images/cert-4.jpg" onerror="this.src='https://placehold.co/200x280?text=Safety+Cert'"></div>
+          <div class="cert-slide"><img src="images/cert-1.jpg" onerror="this.src='https://placehold.co/200x280?text=CE+Cert'"></div>
+          <div class="cert-slide"><img src="images/cert-2.jpg" onerror="this.src='https://placehold.co/200x280?text=ISO+Cert'"></div>
+          <div class="cert-slide"><img src="images/cert-3.jpg" onerror="this.src='https://placehold.co/200x280?text=RoHS+Cert'"></div>
+          <div class="cert-slide"><img src="images/cert-4.jpg" onerror="this.src='https://placehold.co/200x280?text=Safety+Cert'"></div>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="feedback">
     <div class="container">
-      <div class="section-header"><h2 class="section-title">Global <span>Feedback</span></h2><p>Real-world solar cooling performance from our clients.</p></div>
+      <div class="section-header"><h2 class="section-title reveal">Global <span>Feedback</span></h2></div>
       <div class="testimonials-grid">
-        
-        <div class="testimonial-card">
-          <div class="testimonial-image" onclick="zoomImage(this)"><img src="./images/user-1.jpg" onerror="this.src='https://placehold.co/400x250?text=Dubai+Client+Installation'"></div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-image" onclick="zoomImage(this)"><img src="./images/user-1.jpg" onerror="this.src='https://placehold.co/400x250?text=Dubai+Client'"></div>
           <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="testimonial-text">"The efficiency is perfect for our off-grid home in Dubai. Keeps ice frozen easily!"</p>
-          <div class="client-info"><div class="client-avatar">AH</div><div><h4 style="margin:0">Ahmed H.</h4><small>Dubai, UAE 🇦🇪</small></div></div>
+          <p class="testimonial-text">"The efficiency is perfect for our off-grid home in Dubai."</p>
+          <div class="client-info"><div class="client-avatar">AH</div><div><h4 style="color:var(--dark)">Ahmed H.</h4><small>Dubai, UAE</small></div></div>
         </div>
-
-        <div class="testimonial-card">
-          <div class="testimonial-image" onclick="zoomImage(this)"><img src="./images/user-2.jpg" onerror="this.src='https://placehold.co/400x250?text=Nigeria+Shop+Installation'"></div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-image" onclick="zoomImage(this)"><img src="./images/user-2.jpg" onerror="this.src='https://placehold.co/400x250?text=Nigeria+Client'"></div>
           <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="testimonial-text">"LVSUNEX 309L is a beast for my grocery shop in Lagos. Great value and service."</p>
-          <div class="client-info"><div class="client-avatar">KO</div><div><h4 style="margin:0">Kingsley O.</h4><small>Lagos, Nigeria 🇳🇬</small></div></div>
+          <p class="testimonial-text">"LVSUNEX 309L is a beast for my shop in Lagos."</p>
+          <div class="client-info"><div class="client-avatar">KO</div><div><h4 style="color:var(--dark)">Kingsley O.</h4><small>Lagos, Nigeria</small></div></div>
         </div>
-
-        <div class="testimonial-card">
-          <div class="testimonial-image" onclick="zoomImage(this)"><img src="./images/user-3.jpg" onerror="this.src='https://placehold.co/400x250?text=Kenya+Farm+Installation'"></div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-image" onclick="zoomImage(this)"><img src="./images/user-3.jpg" onerror="this.src='https://placehold.co/400x250?text=Kenya+Client'"></div>
           <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="testimonial-text">"Very satisfied with the freezer design. Saves space and the compressor is so quiet."</p>
-          <div class="client-info"><div class="client-avatar">SK</div><div><h4 style="margin:0">Samuel K.</h4><small>Nairobi, Kenya 🇰🇪</small></div></div>
+          <p class="testimonial-text">"Very satisfied with the DC design. Quiet and fast cooling."</p>
+          <div class="client-info"><div class="client-avatar">SK</div><div><h4 style="color:var(--dark)">Samuel K.</h4><small>Nairobi, Kenya</small></div></div>
         </div>
-
       </div>
     </div>
   </section>
 
   <div id="imgModal" class="img-modal" onclick="this.style.display='none'"><img id="modalImg" src=""></div>
-  
-  <footer><div class="container"><div class="footer-grid"><div><div class="logo">LVSUNEX</div><p>Trusted off-grid cooling since 2015.</p></div><div><h4>Contact</h4><p><i class="fa-brands fa-whatsapp"></i> +86 13566349436</p><p>williamlvsunexsolar@gmail.com</p></div></div><div class="copyright">&copy; 2026 LVSUNEX Solar. All Rights Reserved.</div></div></footer>
-
   <a href="https://wa.me/8613566349436" class="whatsapp-float" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div><div class="logo" style="margin-bottom:20px">LVSUNEX</div><p>Global leader in DC cooling since 2015.</p></div>
+        <div><p style="color:white; font-weight:700; margin-bottom:20px">Contact</p><p>+86 13566349436</p><p>williamlvsunexsolar@gmail.com</p></div>
+      </div>
+      <div class="copyright">&copy; 2026 LVSUNEX Solar. All Rights Reserved.</div>
+    </div>
+  </footer>
 
   <script>
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => { if (window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); });
-    function zoomImage(container) { const img = container.querySelector('img'); const modal = document.getElementById('imgModal'); const modalImg = document.getElementById('modalImg'); modal.style.display = "flex"; modalImg.src = img.src; }
+    window.addEventListener('scroll', () => { 
+        if (window.scrollY > 50) navbar.classList.add('scrolled'); 
+        else navbar.classList.remove('scrolled'); 
+    });
+
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-img');
+    const dotContainer = document.getElementById('sliderDots');
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.onclick = () => goToSlide(i);
+      dotContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+    function updateSlides() {
+      slides.forEach((s, i) => {
+        s.classList.toggle('active', i === currentSlide);
+        dots[i].classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    function changeSlide(dir) {
+      currentSlide = (currentSlide + dir + slides.length) % slides.length;
+      updateSlides();
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      updateSlides();
+    }
+
+    let slideTimer = setInterval(() => changeSlide(1), 4000);
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    function zoomImage(container) { 
+      const img = container.querySelector('img'); 
+      const modal = document.getElementById('imgModal'); 
+      const modalImg = document.getElementById('modalImg'); 
+      modal.style.display = "flex"; 
+      modalImg.src = img.src; 
+    }
   </script>
 </body>
 </html>
