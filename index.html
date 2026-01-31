@@ -121,6 +121,46 @@
     .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--dark); font-size: 14px; }
     .form-group input, .form-group textarea { width: 100%; padding: 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-family: inherit; font-size: 14px; }
 
+    /* --- Social Media Footer --- */
+    .footer-main {
+      padding: 60px 0 30px;
+      background: var(--dark);
+      color: white;
+      text-align: center;
+    }
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .footer-logo { font-size: 28px; font-weight: 800; margin-bottom: 15px; color: var(--primary); }
+    .footer-contact-info { margin-bottom: 30px; color: rgba(255,255,255,0.7); font-size: 15px; }
+    .footer-contact-info p { margin: 5px 0; }
+    
+    .social-icons-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    .social-circle-link {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white !important;
+      font-size: 22px;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    .social-circle-link:hover { transform: translateY(-5px) scale(1.1); }
+    .brand-fb { background-color: #1877F2; }
+    .brand-ins { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285ae1 90%); }
+    .brand-tk { background-color: #000000; border: 1px solid rgba(255,255,255,0.2); }
+    .footer-copy { color: rgba(255,255,255,0.3); font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 25px; }
+
     /* --- Responsive Fixes --- */
     @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(2, 1fr); } .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 768px) {
@@ -133,13 +173,27 @@
       }
       .nav-links.active { right: 0; }
       .nav-item > a { font-size: 18px; display: block; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      
+      /* 修正手机端下拉菜单看不见的问题 */
+      .dropdown-menu { 
+        position: static; 
+        opacity: 1; 
+        visibility: visible; 
+        transform: none; 
+        background: rgba(255,255,255,0.05); /* 手机端背景设为半透明深色 */
+        display: none; 
+        box-shadow: none; 
+        width: 100%;
+        margin-top: 10px;
+      }
+      .dropdown-menu a { color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.05); }
+      .nav-item.open .dropdown-menu { display: block; }
+      
       .nav-links .mobile-quote { display: flex !important; margin-top: 30px; width: 100%; justify-content: center; }
       .hero-slider { height: 60vh; }
       .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .testimonials-grid { grid-template-columns: 1fr; }
       .contact-form-card { padding: 35px 20px; }
-      .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; background: transparent; display: none; box-shadow: none; padding-left: 20px; }
-      .nav-item.open .dropdown-menu { display: block; }
     }
 
     .img-modal { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; cursor: zoom-out; }
@@ -234,41 +288,41 @@
       <div class="product-category-section" data-type="update">
         <div class="product-category-title">Upgraded Version DC Solar Freezer</div>
         <div class="products-grid">
-          <div class="product-card"><div class="product-img-box"><img src="./images/100L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>100L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | High-efficiency DC compressor for maximum energy saving.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/150L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>150L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Best-in-class insulation. Keeps frozen for 48h.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/200L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>200L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Dual-voltage switching. High-performance DC cooling.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/250L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>250L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Heavy-duty construction with durable hardware.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/300L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>300L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Precision temperature control. Silent tech.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/350L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>350L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Largest top-door model. Rapid freezing.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/100L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>100L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | High-efficiency DC compressor.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/150L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>150L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Best-in-class insulation.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/200L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>200L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | High-performance DC cooling.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/250L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>250L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Heavy-duty construction.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/300L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>300L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Precision temperature control.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/350L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>350L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Largest top-door model.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
         </div>
       </div>
 
       <div class="product-category-section" data-type="aio">
         <div class="product-category-title">All-in-One Solar Freezer (Built-in Battery)</div>
         <div class="products-grid">
-          <div class="product-card"><div class="product-img-box"><img src="./images/aio100L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>100L All-in-One</h3><p class="product-spec">12V/24V DC | No external wiring. Plug & play internal battery.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/aio-150L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>150L All-in-One</h3><p class="product-spec">12V/24V DC | Integrated controller for 24/7 autonomous cooling.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/aio-200L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>200L All-in-One</h3><p class="product-spec">12V/24V DC | Designed for areas with zero infrastructure.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/aio100L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>100L All-in-One</h3><p class="product-spec">12V/24V DC | Plug & play internal battery.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/aio-150L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>150L All-in-One</h3><p class="product-spec">12V/24V DC | Integrated controller.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/aio-200L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>200L All-in-One</h3><p class="product-spec">12V/24V DC | For zero infrastructure areas.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
         </div>
       </div>
 
       <div class="product-category-section" data-type="upright">
         <div class="product-category-title">Upright DC Solar Freezer</div>
         <div class="products-grid">
-          <div class="product-card"><div class="product-img-box"><img src="./images/75L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>75L Upright Freezer</h3><p class="product-spec">12V/24V DC | Space-saving design with pull-out drawers.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/180L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>180L Upright Freezer</h3><p class="product-spec">12V/24V DC | Multi-layer organization. Thermal stability.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/198L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>198L Upright Freezer</h3><p class="product-spec">12V/24V DC | Efficient vertical storage for medical/food.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/75L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>75L Upright Freezer</h3><p class="product-spec">12V/24V DC | Pull-out drawers.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/180L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>180L Upright Freezer</h3><p class="product-spec">12V/24V DC | Multi-layer organization.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/198L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>198L Upright Freezer</h3><p class="product-spec">12V/24V DC | Efficient vertical storage.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
         </div>
       </div>
 
       <div class="product-category-section" data-type="fridge">
         <div class="product-category-title">Solar Refrigerator</div>
         <div class="products-grid">
-          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-88L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>88L Solar Fridge</h3><p class="product-spec">12V/24V DC | Single door with ice box. Under 45W.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-90L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>90L Solar Fridge</h3><p class="product-spec">12V/24V DC | Compact model with adjustable shelves.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-105L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>105L Solar Fridge</h3><p class="product-spec">12V/24V DC | Double door Top Freezer. Separate zones.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-180L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>180L Solar Fridge</h3><p class="product-spec">12V/24V DC | Family size. Superior cooling in 43°C ambient.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-213L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>213L Solar Fridge</h3><p class="product-spec">12V/24V DC | Luxury series. High-efficiency compressor.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-88L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>88L Solar Fridge</h3><p class="product-spec">12V/24V DC | Single door with ice box.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-90L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>90L Solar Fridge</h3><p class="product-spec">12V/24V DC | Compact model.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-105L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>105L Solar Fridge</h3><p class="product-spec">12V/24V DC | Double door Top Freezer.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-180L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>180L Solar Fridge</h3><p class="product-spec">12V/24V DC | Family size.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-213L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>213L Solar Fridge</h3><p class="product-spec">12V/24V DC | Luxury series.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
         </div>
       </div>
     </div>
@@ -322,13 +376,9 @@
     <div class="container">
       <div class="section-header"><h2 class="section-title">Inquire <span>Now</span></h2></div>
       <div class="contact-form-card">
-        
         <form action="https://formspree.io/f/meekwkkw" method="POST">
-          
           <input type="hidden" name="_next" value="https://www.lvsunexsolar.com">
-          
           <input type="hidden" name="_captcha" value="false">
-
           <div class="form-group">
             <label>Full Name *</label>
             <input type="text" name="name" required placeholder="Name or Company">
@@ -347,10 +397,37 @@
           </div>
           <button type="submit" class="btn-quote" style="width:100%; justify-content:center; padding: 16px;">Send Message</button>
         </form>
-
       </div>
     </div>
   </section>
+
+  <footer class="footer-main">
+    <div class="footer-content">
+      <div class="footer-logo">LVSUNEX</div>
+      
+      <div class="footer-contact-info">
+        <p><i class="fa-solid fa-phone"></i> +86 13566349436</p>
+        <p><i class="fa-solid fa-envelope"></i> williamlvsunexsolar@gmail.com</p>
+        <p><i class="fa-solid fa-location-dot"></i> Ningbo, China</p>
+      </div>
+
+      <div class="social-icons-container">
+        <a href="https://www.facebook.com/share/1MYXoS5voB/?mibextid=wwXIfr" class="social-circle-link brand-fb" target="_blank">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/williamlvsunexsolar?igsh=dHhqemE0NWM5cjE5&utm_source=qr" class="social-circle-link brand-ins" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@bahir9422?_r=1&_t=ZS-93WsAwU16iz" class="social-circle-link brand-tk" target="_blank">
+          <i class="fab fa-tiktok"></i>
+        </a>
+      </div>
+
+      <div class="footer-copy">
+        &copy; 2026 LVSUNEX Solar. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
 
   <div id="imgModal" class="img-modal" onclick="this.style.display='none'"><img id="modalImg" src="" style="max-width:90%; max-height:90%; object-fit:contain;"></div>
   <a href="https://wa.me/8613566349436" class="whatsapp-float" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
