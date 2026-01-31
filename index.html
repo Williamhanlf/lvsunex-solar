@@ -51,8 +51,6 @@
 
     .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 5001; padding: 5px; }
     .menu-toggle span { width: 28px; height: 3px; background: var(--white); border-radius: 2px; transition: 0.3s; transform-origin: center; }
-
-    /* 汉堡按钮变成 X 的动画样式 */
     .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
     .menu-toggle.active span:nth-child(2) { opacity: 0; }
     .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
@@ -140,8 +138,6 @@
       .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .testimonials-grid { grid-template-columns: 1fr; }
       .contact-form-card { padding: 35px 20px; }
-      
-      /* 手机端下拉菜单 */
       .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; background: transparent; display: none; box-shadow: none; padding-left: 20px; }
       .nav-item.open .dropdown-menu { display: block; }
     }
@@ -326,13 +322,32 @@
     <div class="container">
       <div class="section-header"><h2 class="section-title">Inquire <span>Now</span></h2></div>
       <div class="contact-form-card">
-        <form action="https://formsubmit.co/williamlvsunexsolar@gmail.com" method="POST">
-          <div class="form-group"><label>Full Name *</label><input type="text" name="name" required placeholder="Name or Company"></div>
-          <div class="form-group"><label>Email Address *</label><input type="email" name="email" required placeholder="email@example.com"></div>
-          <div class="form-group"><label>WhatsApp / Phone</label><input type="text" name="phone" placeholder="+86..."></div>
-          <div class="form-group"><label>Message *</label><textarea name="message" rows="5" required placeholder="Specify model and quantity..."></textarea></div>
+        
+        <form action="https://formspree.io/f/meekwkkw" method="POST">
+          
+          <input type="hidden" name="_next" value="https://www.lvsunexsolar.com">
+          
+          <input type="hidden" name="_captcha" value="false">
+
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" name="name" required placeholder="Name or Company">
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" name="email" required placeholder="email@example.com">
+          </div>
+          <div class="form-group">
+            <label>WhatsApp / Phone</label>
+            <input type="text" name="phone" placeholder="+86...">
+          </div>
+          <div class="form-group">
+            <label>Message *</label>
+            <textarea name="message" rows="5" required placeholder="Specify model and quantity..."></textarea>
+          </div>
           <button type="submit" class="btn-quote" style="width:100%; justify-content:center; padding: 16px;">Send Message</button>
         </form>
+
       </div>
     </div>
   </section>
@@ -346,18 +361,15 @@
     const mobileToggle = document.getElementById('mobile-toggle');
     const navLinks = document.getElementById('nav-links');
     
-    // 开关菜单逻辑
     mobileToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       mobileToggle.classList.toggle('active');
       navLinks.classList.toggle('active');
     });
 
-    // 点击链接自动关闭菜单
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', (e) => {
         if (window.innerWidth <= 768) {
-          // 如果是产品下拉，不关闭
           if (link.parentElement.id === 'product-dropdown-trigger') {
             link.parentElement.classList.toggle('open');
           } else {
@@ -368,7 +380,6 @@
       });
     });
 
-    // 点击页面其他地方关闭菜单
     document.addEventListener('click', (e) => {
       if (!navLinks.contains(e.target) && !mobileToggle.contains(e.target)) {
         mobileToggle.classList.remove('active');
