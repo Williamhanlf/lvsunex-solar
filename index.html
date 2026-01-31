@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LVSUNEX SOLAR | Global Premium Solar Freezer & Refrigerator Solutions</title>
+  <title>LVSUNEX | Global Factory Exporter - Premium DC Solar Freezer & Refrigerator</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
@@ -26,18 +26,17 @@
     body { font-family: 'Inter', sans-serif; background-color: var(--light); color: var(--text); line-height: 1.6; }
     a { text-decoration: none; color: inherit; }
 
-    /* --- Navbar & 下拉菜单修复 --- */
+    /* --- Navbar --- */
     .navbar { position: fixed; top: 0; width: 100%; z-index: 5000; padding: 18px 0; transition: var(--transition); background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
     .navbar.scrolled { background: rgba(15, 23, 42, 0.98); padding: 12px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
     .nav-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    .logo { font-size: 24px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 10px; }
+    .logo { font-size: 24px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 10px; z-index: 5001; }
     
     .nav-links { display: flex; gap: 30px; align-items: center; }
     .nav-item { position: relative; padding: 10px 0; cursor: pointer; }
     .nav-item > a { color: rgba(255,255,255,0.9); font-weight: 600; font-size: 14px; transition: 0.3s; }
     .nav-item:hover > a { color: var(--primary); }
 
-    /* 下拉菜单 */
     .dropdown-menu {
       position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
       background: var(--white); min-width: 240px; border-radius: 12px;
@@ -51,45 +50,66 @@
 
     .btn-quote { background: var(--primary); color: #022c22; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; }
 
-    /* --- Hero Slider (全屏+白色标题) --- */
+    .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 5001; }
+    .menu-toggle span { width: 28px; height: 3px; background: var(--white); border-radius: 2px; transition: 0.3s; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .navbar .desktop-only { display: none; }
+      
+      .nav-links {
+        position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+        background: var(--dark); flex-direction: column; align-items: flex-start;
+        padding: 100px 40px; transition: 0.4s ease-in-out; box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+      }
+      .nav-links.active { right: 0; }
+      .nav-item { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      .nav-item > a { font-size: 18px; display: block; padding: 15px 0; }
+      
+      .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; background: transparent; display: none; padding-left: 20px; box-shadow: none; }
+      .nav-item.open .dropdown-menu { display: block; }
+      .dropdown-menu a { color: rgba(255,255,255,0.7); border: none; font-size: 15px; }
+      .nav-links .mobile-quote { display: flex !important; margin-top: 30px; width: 100%; justify-content: center; }
+
+      .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+      .menu-toggle.active span:nth-child(2) { opacity: 0; }
+      .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+      .hero-slider { height: 70vh; }
+      /* 这里的 p 标签字体调大 */
+      .slide-content p { font-size: 1.35rem !important; line-height: 1.4; margin-top: 15px; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+      
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .product-title { font-size: 14px; }
+      .btn-product { padding: 8px; font-size: 11px; }
+    }
+
+    /* --- Hero Slider --- */
     .hero-slider { height: 80vh; width: 100vw; position: relative; overflow: hidden; background: #000; }
     .hero-images { position: absolute; width: 100%; height: 100%; z-index: 1; }
     .slide-item { position: absolute; width: 100%; height: 100%; opacity: 0; transition: 1.2s ease-in-out; }
     .slide-item.active { opacity: 1; }
     .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 10s linear; }
     .slide-item.active .hero-img { transform: scale(1.1); }
-    .slide-overlay { position: absolute; width: 100%; height: 100%; z-index: 3; background: rgba(0,0,0,0.4); }
-    
-    .slide-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4; text-align: center; color: #fff; width: 100%; padding: 0 20px; pointer-events: none; }
-    .slide-content h1 { 
-      font-size: clamp(32px, 5vw, 68px); 
-      font-weight: 800; 
-      color: var(--white); 
-      text-transform: uppercase; 
-      letter-spacing: -1px;
-      text-shadow: 0 4px 15px rgba(0,0,0,0.6), 0 0 30px rgba(0,0,0,0.2); 
-      margin-bottom: 10px;
-    }
-    .slide-content p { font-size: 1.2rem; font-weight: 400; color: var(--white); opacity: 0.95; }
+    .slide-overlay { position: absolute; width: 100%; height: 100%; z-index: 3; background: rgba(0,0,0,0.45); }
+    .slide-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4; text-align: center; color: #fff; width: 100%; padding: 0 25px; pointer-events: none; }
+    .slide-content h1 { font-size: clamp(32px, 5vw, 68px); font-weight: 800; color: var(--white); text-transform: uppercase; letter-spacing: -1px; text-shadow: 0 4px 15px rgba(0,0,0,0.6); margin-bottom: 10px; }
+    /* 桌面端副标题大小 */
+    .slide-content p { font-size: 1.5rem; font-weight: 400; color: var(--white); opacity: 1; max-width: 800px; margin: 0 auto; }
 
-    /* --- Section & Title (统一标题格式) --- */
+    /* --- 其他部分保持完整 --- */
     section { padding: 100px 0; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
     .section-header { text-align: center; margin-bottom: 60px; }
     .section-title { font-size: 38px; font-weight: 800; color: var(--dark); letter-spacing: -1px; }
     .section-title span { color: var(--primary); }
-
-    /* --- Why Us --- */
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
     .feature-card { background: var(--white); padding: 50px 35px; border-radius: 24px; text-align: center; border: 1px solid rgba(0,0,0,0.04); transition: 0.3s; }
     .feature-icon { width: 75px; height: 75px; background: rgba(34, 197, 94, 0.08); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; margin: 0 auto 25px; }
     .feature-card h3 { color: var(--dark); margin-bottom: 10px; font-weight: 700; }
-
-    /* --- Products --- */
     .filter-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 40px 0; }
     .tab-btn { background: #fff; border: 1.5px solid #e2e8f0; padding: 10px 25px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: 0.3s; color: var(--text-light); }
     .tab-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.3); }
-
     .product-category-title { font-size: 24px; font-weight: 700; margin-bottom: 30px; padding-left: 15px; border-left: 4px solid var(--primary); color: var(--dark); }
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
     .product-card { background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); display: flex; flex-direction: column; transition: 0.4s; }
@@ -100,32 +120,19 @@
     .product-title { color: var(--dark); font-weight: 700; margin-bottom: 8px; font-size: 18px; }
     .product-spec { font-size: 12px; color: var(--text-light); margin-bottom: 15px; line-height: 1.5; }
     .btn-product { width: 100%; padding: 14px; border: 1.5px solid var(--primary); color: var(--primary); text-align: center; border-radius: 12px; font-weight: 700; margin-top: auto; }
-
-    /* --- Certs & Feedback --- */
     .cert-scroll-container { width: 100%; overflow: hidden; background: #fff; padding: 40px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
     .cert-wrapper { display: flex; width: calc(280px * 8); animation: scrollCert 20s linear infinite; }
     .cert-slide { width: 280px; padding: 0 20px; flex-shrink: 0; cursor: zoom-in; }
     .cert-slide img { width: 100%; height: 200px; object-fit: contain; border: 1px solid #eee; border-radius: 8px; padding: 10px; background: #fff; }
     @keyframes scrollCert { 100% { transform: translateX(calc(-280px * 4)); } }
-
     .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
     .testimonial-card { background: var(--white); padding: 30px; border-radius: 24px; border: 1px solid rgba(0,0,0,0.03); }
     .testimonial-image { width: 100%; aspect-ratio: 16/10; overflow: hidden; border-radius: 16px; margin-bottom: 20px; cursor: zoom-in; }
     .testimonial-image img { width: 100%; height: 100%; object-fit: cover; }
     .stars { color: #f59e0b; margin-bottom: 12px; }
-
-    /* --- Components --- */
     .img-modal { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; cursor: zoom-out; }
     .img-modal img { max-width: 90%; max-height: 90%; object-fit: contain; }
     .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 3000; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hero-slider { height: 60vh; }
-      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .product-title { font-size: 14px; }
-      .btn-product { padding: 8px; font-size: 11px; }
-    }
   </style>
 </head>
 <body>
@@ -133,11 +140,16 @@
   <nav class="navbar" id="navbar">
     <div class="nav-content">
       <div class="logo"><i class="fa-solid fa-solar-panel" style="color:var(--primary)"></i> LVSUNEX</div>
-      <div class="nav-links">
+      
+      <div class="menu-toggle" id="mobile-toggle">
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="nav-links" id="nav-links">
         <div class="nav-item"><a href="#home">Home</a></div>
         <div class="nav-item"><a href="#why-us">Why Us</a></div>
-        <div class="nav-item">
-          <a href="#products">Products <i class="fa-solid fa-chevron-down" style="font-size:10px"></i></a>
+        <div class="nav-item" id="product-dropdown-trigger">
+          <a href="javascript:void(0)">Products <i class="fa-solid fa-chevron-down" style="font-size:10px"></i></a>
           <div class="dropdown-menu">
             <a href="#products" onclick="filterAndScroll('basic')">Basic Solar Freezer</a>
             <a href="#products" onclick="filterAndScroll('update')">Upgraded Solar Freezer</a>
@@ -147,8 +159,10 @@
           </div>
         </div>
         <div class="nav-item"><a href="#feedback">Feedback</a></div>
+        <a href="https://wa.me/8613566349436" class="btn-quote mobile-quote" style="display:none;" target="_blank"><i class="fa-brands fa-whatsapp"></i> Get Quote</a>
       </div>
-      <a href="https://wa.me/8613566349436" class="btn-quote" target="_blank"><i class="fa-brands fa-whatsapp"></i> Get Quote</a>
+
+      <a href="https://wa.me/8613566349436" class="btn-quote desktop-only" target="_blank"><i class="fa-brands fa-whatsapp"></i> Get Quote</a>
     </div>
   </nav>
 
@@ -160,8 +174,8 @@
     </div>
     <div class="slide-overlay"></div>
     <div class="slide-content">
-      <h1>Premium DC Solar Freezers</h1>
-      <p>Leading the Off-Grid Cooling Revolution Since 2015</p>
+      <h1>Global Source for Premium DC Solar Freezers</h1>
+      <p>Direct factory supply exporting to 50+ countries. Engineered for extreme climates since 2015.</p>
     </div>
   </header>
 
@@ -180,7 +194,6 @@
   <section id="products" style="background-color: #f8fafc;">
     <div class="container">
       <div class="section-header"><h2 class="section-title">Our <span>Solutions</span></h2></div>
-      
       <div class="filter-tabs">
         <button class="tab-btn active" data-filter="all" onclick="filterProducts('all')">All Products</button>
         <button class="tab-btn" data-filter="basic" onclick="filterProducts('basic')">Basic Solar Freezer</button>
@@ -193,51 +206,51 @@
       <div class="product-category-section" data-type="basic">
         <div class="product-category-title">Classic Basic DC Solar Freezer</div>
         <div class="products-grid">
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/159L.jpg"></div><div class="product-info"><h3 class="product-title">159L Solar Freezer</h3><p class="product-spec">12V/24V DC | -18℃ Deep Cooling | High-density insulation for long-term cold storage.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/209L.jpg"></div><div class="product-info"><h3 class="product-title">209L Solar Freezer</h3><p class="product-spec">12V/24V DC | Optimal for small families. Fast pull-down temperature and silent operation.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/259L.jpg"></div><div class="product-info"><h3 class="product-title">259L Solar Freezer</h3><p class="product-spec">12V/24V DC | Commercial durability. Perfect for off-grid shops and remote areas.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/309L.jpg"></div><div class="product-info"><h3 class="product-title">309L Solar Freezer</h3><p class="product-spec">12V/24V DC | Max storage capacity with digital control. The best-selling industrial model.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/159L.jpg"></div><div class="product-info"><h3 class="product-title">159L Solar Freezer</h3><p class="product-spec">12V/24V DC | -18℃ Deep Cooling</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/209L.jpg"></div><div class="product-info"><h3 class="product-title">209L Solar Freezer</h3><p class="product-spec">12V/24V DC | Optimal for small families.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/259L.jpg"></div><div class="product-info"><h3 class="product-title">259L Solar Freezer</h3><p class="product-spec">12V/24V DC | Commercial durability.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/309L.jpg"></div><div class="product-info"><h3 class="product-title">309L Solar Freezer</h3><p class="product-spec">12V/24V DC | Max storage capacity.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire Now</a></div></div>
         </div>
       </div>
 
       <div class="product-category-section" data-type="update">
         <div class="product-category-title">Upgraded Version DC Solar Freezer</div>
         <div class="products-grid">
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/100L.jpg"></div><div class="product-info"><h3 class="product-title">100L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | New 2026 Energy Saving Chip. Ultra-compact with high refrigeration efficiency for mobile use.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/150L.jpg"></div><div class="product-info"><h3 class="product-title">150L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Best-in-class insulation. Keeps frozen for 48h after power off. Anti-rust finish.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/200L.jpg"></div><div class="product-info"><h3 class="product-title">200L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Dual-voltage intelligent switching. High-performance DC compressor for hot climates.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/250L.jpg"></div><div class="product-info"><h3 class="product-title">250L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Industrial design with reinforced hinges. Ideal for heavy-duty commercial storage.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/300L.jpg"></div><div class="product-info"><h3 class="product-title">300L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Precision temperature control. Silent tech (< 40dB) with wide-voltage protection.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/350L.jpg"></div><div class="product-info"><h3 class="product-title">350L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Our largest top-door model. 5-star energy rating with rapid freezing capability.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/100L.jpg"></div><div class="product-info"><h3 class="product-title">100L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | 2026 Energy Saving Chip</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/150L.jpg"></div><div class="product-info"><h3 class="product-title">150L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Best-in-class insulation</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/200L.jpg"></div><div class="product-info"><h3 class="product-title">200L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Dual-voltage intelligent</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/250L.jpg"></div><div class="product-info"><h3 class="product-title">250L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Industrial design</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/300L.jpg"></div><div class="product-info"><h3 class="product-title">300L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Precision control</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/350L.jpg"></div><div class="product-info"><h3 class="product-title">350L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Largest top-door model</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
         </div>
       </div>
 
       <div class="product-category-section" data-type="aio">
         <div class="product-category-title">All-in-One Solar Freezer (Built-in Battery)</div>
         <div class="products-grid">
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio100L.jpg"></div><div class="product-info"><h3 class="product-title">100L All-in-One Solar Freezer</h3><p class="product-spec">12V/24V DC | No external wiring needed. Plug & play with internal battery system.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio-150L.jpg"></div><div class="product-info"><h3>150L All-in-One Solar Freezer</h3><p class="product-spec">12V/24V DC | Integrated solar controller and battery storage for 24/7 cooling.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio-200L.jpg"></div><div class="product-info"><h3>200L All-in-One Solar Freezer</h3><p class="product-spec">12V/24V DC | Maximum autonomy. Designed for areas with zero power infrastructure.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio100L.jpg"></div><div class="product-info"><h3 class="product-title">100L All-in-One</h3><p class="product-spec">12V/24V DC | No external wiring</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio-150L.jpg"></div><div class="product-info"><h3>150L All-in-One</h3><p class="product-spec">12V/24V DC | Integrated battery</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/aio-200L.jpg"></div><div class="product-info"><h3>200L All-in-One</h3><p class="product-spec">12V/24V DC | Zero infrastructure</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
         </div>
       </div>
 
       <div class="product-category-section" data-type="upright">
         <div class="product-category-title">Upright DC Solar Freezer</div>
         <div class="products-grid">
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/75L.jpg"></div><div class="product-info"><h3>75L Upright Solar Freezer</h3><p class="product-spec">12V/24V DC | Space-saving vertical design with pull-out drawers for easy access.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/180L.jpg"></div><div class="product-info"><h3>180L Upright Solar Freezer</h3><p class="product-spec">12V/24V DC | Multi-layer organization. Excellent thermal stability and low energy drain.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/198L.jpg"></div><div class="product-info"><h3>198L Upright Solar Freezer</h3><p class="product-spec">12V/24V DC | High-efficiency vertical cooling. Perfect for medical or organized food storage.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/75L.jpg"></div><div class="product-info"><h3>75L Upright Freezer</h3><p class="product-spec">Space-saving design</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/180L.jpg"></div><div class="product-info"><h3>180L Upright Freezer</h3><p class="product-spec">Multi-layer organization</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/198L.jpg"></div><div class="product-info"><h3>198L Upright Freezer</h3><p class="product-spec">Organized food storage</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
         </div>
       </div>
 
       <div class="product-category-section" data-type="fridge">
         <div class="product-category-title">Solar Refrigerator</div>
         <div class="products-grid">
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-88L.jpg"></div><div class="product-info"><h3 class="product-title">88L Solar Refrigerator</h3><p class="product-spec">12V/24V DC | Single door with ice box. Low power consumption (under 45W).</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-90L.jpg"></div><div class="product-info"><h3 class="product-title">90L Solar Refrigerator</h3><p class="product-spec">12V/24V DC | Compact home model. Adjustable shelves and internal LED lighting.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-105L.jpg"></div><div class="product-info"><h3 class="product-title">105L Solar Refrigerator</h3><p class="product-spec">12V/24V DC | Double door (Top Freezer). Separate cooling zones for fresh and frozen items.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-180L.jpg"></div><div class="product-info"><h3 class="product-title">180L Solar Refrigerator</h3><p class="product-spec">12V/24V DC | Family size. Superior cooling performance even in 43°C ambient temperature.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-213L.jpg"></div><div class="product-info"><h3 class="product-title">213L Solar Refrigerator</h3><p class="product-spec">12V/24V DC | Luxury series. High-efficiency DC compressor with thickened insulation walls.</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-88L.jpg"></div><div class="product-info"><h3>88L Refrigerator</h3><p class="product-spec">Low power consumption</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-90L.jpg"></div><div class="product-info"><h3>90L Refrigerator</h3><p class="product-spec">Compact home model</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-105L.jpg"></div><div class="product-info"><h3>105L Refrigerator</h3><p class="product-spec">Double door design</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-180L.jpg"></div><div class="product-info"><h3>180L Refrigerator</h3><p class="product-spec">Family size cooling</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box" onclick="zoomImage(this)"><img src="./images/fridge-213L.jpg"></div><div class="product-info"><h3>213L Refrigerator</h3><p class="product-spec">Luxury series efficiency</p><a href="https://wa.me/8613566349436" class="btn-product">Inquire</a></div></div>
         </div>
       </div>
     </div>
@@ -268,19 +281,19 @@
         <div class="testimonial-card">
           <div class="testimonial-image" onclick="zoomImage(this)"><img src="./images/user-1.jpg" onerror="this.src='https://placehold.co/400x250?text=Dubai'"></div>
           <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="testimonial-text">"The 12V/24V DC efficiency is perfect for our off-grid home in Dubai. Fast cooling and durable."</p>
+          <p>"The 12V/24V DC efficiency is perfect for our off-grid home in Dubai."</p>
           <div class="client-info"><h4>Ahmed H.</h4><small>Dubai, UAE</small></div>
         </div>
         <div class="testimonial-card">
           <div class="testimonial-image" onclick="zoomImage(this)"><img src="./images/user-2.jpg" onerror="this.src='https://placehold.co/400x250?text=Nigeria'"></div>
           <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="testimonial-text">"LVSUNEX 309L Solar Freezer is a beast for my shop in Lagos. Keeps ice frozen even in extreme heat."</p>
+          <p>"Keeps ice frozen even in extreme heat in Lagos. Very satisfied."</p>
           <div class="client-info"><h4>Kingsley O.</h4><small>Lagos, Nigeria</small></div>
         </div>
         <div class="testimonial-card">
           <div class="testimonial-image" onclick="zoomImage(this)"><img src="./images/user-3.jpg" onerror="this.src='https://placehold.co/400x250?text=Kenya'"></div>
           <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="testimonial-text">"Very satisfied with the DC design. Quiet operation and handles voltage fluctuations perfectly."</p>
+          <p>"Quiet operation and handles voltage fluctuations perfectly."</p>
           <div class="client-info"><h4>Samuel K.</h4><small>Nairobi, Kenya</small></div>
         </div>
       </div>
@@ -300,12 +313,29 @@
   </footer>
 
   <script>
-    // 导航栏滚动效果
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // 分类跳转与过滤
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navLinks = document.getElementById('nav-links');
+    
+    mobileToggle.addEventListener('click', () => {
+      mobileToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768 && link.parentElement.id === 'product-dropdown-trigger') {
+           link.parentElement.classList.toggle('open');
+        } else if (link.getAttribute('href').startsWith('#')) {
+           mobileToggle.classList.remove('active');
+           navLinks.classList.remove('active');
+        }
+      });
+    });
+
     function filterAndScroll(type) {
       filterProducts(type);
       const target = document.querySelector('#products');
@@ -319,7 +349,6 @@
       });
     }
 
-    // 图片放大预览
     function zoomImage(container) { 
       const img = container.querySelector('img'); 
       const modal = document.getElementById('imgModal'); 
@@ -327,7 +356,6 @@
       modal.style.display = "flex"; 
     }
 
-    // 幻灯片逻辑
     let cur = 0;
     const slides = document.querySelectorAll('.slide-item');
     setInterval(() => {
