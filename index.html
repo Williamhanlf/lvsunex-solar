@@ -417,16 +417,80 @@
   <a href="https://wa.me/8613566349436" class="whatsapp-float" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
   <script>
-    window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
+    // 1. 滚动导航栏变色
+    window.addEventListener('scroll', () => { 
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); 
+    });
+
     const mobileToggle = document.getElementById('mobile-toggle');
     const navLinks = document.getElementById('nav-links');
-    mobileToggle.addEventListener('click', (e) => { e.stopPropagation(); mobileToggle.classList.toggle('active'); navLinks.classList.toggle('active'); });
-    document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', (e) => { if (window.innerWidth <= 768) { if (link.parentElement.id === 'product-dropdown-trigger') { link.parentElement.classList.toggle('open'); } else { mobileToggle.classList.remove('active'); navLinks.classList.remove('active'); } } }); });
-    function filterAndScroll(type) { filterProducts(type); window.scrollTo({ top: document.querySelector('#products').offsetTop - 80, behavior: 'smooth' }); }
-    function filterProducts(type) { document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-filter') === type)); document.querySelectorAll('.product-category-section').forEach(sec => { sec.style.display = (type === 'all' || sec.getAttribute('data-type') === type) ? 'block' : 'none'; }); }
-    function zoomImage(el) { const img = el.querySelector('img') || el; document.getElementById('modalImg').src = img.src; document.getElementById('imgModal').style.display = "flex"; }
-    
-    // 已移除原本控制轮播的定时器脚本，保持代码简洁。
-  </script>
+
+  // 2. 点击汉堡键开关菜单
+    mobileToggle.addEventListener('click', (e) => { 
+        e.stopPropagation(); 
+        mobileToggle.classList.toggle('active'); 
+        navLinks.classList.toggle('active'); 
+        // 这行必须在大括号里面，才能每次点击都判断
+        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+    });
+
+    // 3. 【核心修复】点击菜单外部自动收回
+    document.addEventListener('click', (e) => {
+        if (navLinks.classList.contains('active')) {
+            if (!navLinks.contains(e.target) && !mobileToggle.contains(e.target)) {
+                mobileToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                // 也要加在这里，确保点外面收回后恢复滚动
+                document.body.style.overflow = 'auto';
+            }
+        }
+    });
+    // 4. 点击链接后自动关闭（适配 Products 下拉）
+    document.querySelectorAll('.nav-links a').forEach(link => { 
+        link.addEventListener('click', (e) => { 
+            if (window.innerWidth <= 768) { 
+                // 如果点的是 Products 这一项，我们让它切换显示下拉列表，不关闭整个菜单
+                if (link.parentElement.id === 'product-dropdown-trigger') { 
+                    link.parentElement.classList.toggle('open'); 
+                } else { 
+                    // 点 Home/Company/Contact 等普通链接，直接收回菜单
+                    mobileToggle.classList.remove('active'); 
+                    navLinks.classList.remove('active'); 
+                } 
+            } 
+        }); 
+    });
+
+    // 5. 产品筛选跳转
+    function filterAndScroll(type) { 
+        filterProducts(type); 
+        const productSection = document.querySelector('#products');
+        if (productSection) {
+            window.scrollTo({ top: productSection.offsetTop - 80, behavior: 'smooth' }); 
+        }
+        // 筛选后也自动收回菜单
+        if (window.innerWidth <= 768) {
+            mobileToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+    }
+
+    // 6. 筛选逻辑
+    function filterProducts(type) { 
+        document.querySelectorAll('.tab-btn').forEach(btn => 
+            btn.classList.toggle('active', btn.getAttribute('data-filter') === type)
+        ); 
+        document.querySelectorAll('.product-category-section').forEach(sec => { 
+            sec.style.display = (type === 'all' || sec.getAttribute('data-type') === type) ? 'block' : 'none'; 
+        }); 
+    }
+
+    // 7. 图片放大
+    function zoomImage(el) { 
+        const img = el.querySelector('img') || el; 
+        document.getElementById('modalImg').src = img.src; 
+        document.getElementById('imgModal').style.display = "flex"; 
+    }
+</script>
 </body>
 </html>
