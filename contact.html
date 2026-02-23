@@ -17,33 +17,41 @@
       --text: #334155;
       --text-light: #64748b;
       --white: #ffffff;
-      --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
     body { font-family: 'Inter', sans-serif; background-color: var(--light); color: var(--text); line-height: 1.6; }
     a { text-decoration: none; color: inherit; }
 
-    /* --- Navbar (修正跨页面路径) --- */
-    .navbar { position: fixed; top: 0; width: 100%; z-index: 5000; padding: 18px 0; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .nav-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    .logo { font-size: 24px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 10px; }
+    /* --- Navbar (统一汉堡菜单逻辑) --- */
+    .navbar { position: fixed; top: 0; width: 100%; z-index: 5000; padding: 18px 0; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); transition: var(--transition); }
+    .nav-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; }
+    .logo { font-size: 24px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 10px; z-index: 5001; }
+    
+    .menu-toggle { display: none; color: var(--white); font-size: 24px; cursor: pointer; z-index: 5001; }
+
     .nav-links { display: flex; gap: 30px; align-items: center; }
     .nav-item { position: relative; padding: 10px 0; }
     .nav-item > a { color: rgba(255,255,255,0.9); font-weight: 600; font-size: 14px; transition: 0.3s; }
     .nav-item:hover > a { color: var(--primary); }
 
-    .dropdown-menu {
-      position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
-      background: var(--white); min-width: 240px; border-radius: 12px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2); opacity: 0; visibility: hidden;
-      transition: all 0.3s ease; padding: 10px 0; z-index: 9999;
-    }
-    .nav-item:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
-    .dropdown-menu a { display: block; padding: 12px 20px; color: var(--dark); font-size: 13px; font-weight: 600; border-bottom: 1px solid #f1f5f9; }
-    .dropdown-menu a:hover { background: #f8fafc; color: var(--primary); padding-left: 25px; }
+    .btn-quote { background: var(--primary); color: #022c22; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; z-index: 5001; }
 
-    .btn-quote { background: var(--primary); color: #022c22; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+    /* --- 移动端响应式 --- */
+    @media (max-width: 992px) {
+      .menu-toggle { display: block; }
+      .nav-links {
+        position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; 
+        background: #0f172a; flex-direction: column; justify-content: center;
+        transition: var(--transition); box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+        padding: 80px 40px; align-items: flex-start; gap: 20px;
+      }
+      .nav-links.active { right: 0; }
+      .nav-item { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .nav-item > a { font-size: 18px; display: block; width: 100%; padding: 15px 0; }
+      .btn-quote { display: none; }
+    }
 
     /* --- Contact Page Content --- */
     section#contact-main { padding: 140px 0 80px; }
@@ -53,21 +61,25 @@
     .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 4px; background: var(--primary); border-radius: 2px; }
 
     .contact-wrapper { display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; }
-    .info-card { background: var(--dark); color: white; padding: 40px; border-radius: 30px; }
-    .info-card h3 { color: var(--primary); margin-bottom: 30px; }
+    .info-card { background: var(--dark); color: white; padding: 40px; border-radius: 30px; height: fit-content; }
+    .info-card h3 { color: var(--primary); margin-bottom: 30px; font-size: 22px; }
     .info-item { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 25px; }
     .info-item i { font-size: 20px; color: var(--primary); margin-top: 5px; }
+    .info-item p { margin: 0; font-size: 13px; opacity: 0.7; }
+    .info-item strong { font-size: 16px; display: block; margin-top: 2px; }
 
     .form-card { background: var(--white); padding: 45px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
     .form-group { margin-bottom: 22px; text-align: left; }
     .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; box-sizing: border-box; font-family: inherit; }
-    .btn-send { width: 100%; padding: 16px; background: var(--primary); border: none; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 16px; display: flex; justify-content: center; align-items: center; gap: 10px; }
+    .form-group input, .form-group textarea { width: 100%; padding: 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; box-sizing: border-box; font-family: inherit; font-size: 14px; transition: 0.3s; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1); }
+    
+    .btn-send { width: 100%; padding: 16px; background: var(--primary); border: none; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 16px; display: flex; justify-content: center; align-items: center; gap: 10px; color: #022c22; }
     .btn-send:hover { background: var(--primary-dark); transform: translateY(-3px); }
 
-    /* --- Footer (修正版：Logo 强制居中，其他维持原状) --- */
-    .footer-main { padding: 80px 0 30px; background: var(--dark); color: white; text-align: center; }
-    .footer-logo { font-size: 28px; font-weight: 800; margin-bottom: 15px; color: var(--primary); display: block; text-align: center; } /* 居中关键 */
+    /* --- Footer --- */
+    .footer-main { padding: 60px 0 30px; background: var(--dark); color: white; text-align: center; }
+    .footer-logo { font-size: 28px; font-weight: 800; margin-bottom: 15px; color: var(--primary); display: block; }
     
     .social-icons-container { display: flex; gap: 20px; justify-content: center; margin-bottom: 35px; }
     .social-circle-link { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white !important; font-size: 22px; transition: var(--transition); }
@@ -76,7 +88,12 @@
     .brand-ins { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 90%); }
     .brand-tk { background-color: #000000; border: 1px solid rgba(255,255,255,0.1); }
 
-    @media (max-width: 900px) { .contact-wrapper { grid-template-columns: 1fr; } }
+    @media (max-width: 992px) { 
+      section#contact-main { padding: 100px 0 60px; }
+      .contact-wrapper { grid-template-columns: 1fr; gap: 30px; }
+      .form-card { padding: 30px; }
+      .section-title { font-size: 30px; margin-bottom: 40px; }
+    }
   </style>
 </head>
 <body>
@@ -84,7 +101,12 @@
   <nav class="navbar">
     <div class="nav-content">
       <div class="logo">LVSUNEX</div>
-      <div class="nav-links">
+      
+      <div class="menu-toggle" id="mobile-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+
+      <div class="nav-links" id="nav-menu">
         <div class="nav-item"><a href="index.html">Home</a></div>
         <div class="nav-item"><a href="index.html#company">Company</a></div>
         <div class="nav-item"><a href="products.html">Products</a></div>
@@ -140,6 +162,19 @@
     </div>
     <p style="opacity: 0.4; font-size: 13px;">&copy; 2026 LVSUNEX Solar. All Rights Reserved.</p>
   </footer>
+
+  <script>
+    // 汉堡键开关逻辑
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    mobileToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const icon = mobileToggle.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-xmark');
+    });
+  </script>
 
 </body>
 </html>
