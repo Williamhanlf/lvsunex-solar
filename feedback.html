@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* 100% 沿用原始样式变量 */
     :root {
       --primary: #22c55e;
       --primary-dark: #16a34a;
@@ -18,22 +17,24 @@
       --text: #334155;
       --text-light: #64748b;
       --white: #ffffff;
-      --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
     html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
     body { font-family: 'Inter', sans-serif; background-color: var(--light); color: var(--text); line-height: 1.6; }
     a { text-decoration: none; color: inherit; }
 
-    /* Navbar 保持一模一样 */
+    /* --- Navbar (统一修改为汉堡菜单逻辑) --- */
     .navbar { position: fixed; top: 0; width: 100%; z-index: 5000; padding: 18px 0; transition: var(--transition); background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .nav-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    .logo { font-size: 24px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 10px; }
+    .nav-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; }
+    .logo { font-size: 24px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 10px; z-index: 5001; }
+    
+    .menu-toggle { display: none; color: var(--white); font-size: 24px; cursor: pointer; z-index: 5001; }
+
     .nav-links { display: flex; gap: 30px; align-items: center; }
     .nav-item { position: relative; padding: 10px 0; cursor: pointer; }
     .nav-item > a { color: rgba(255,255,255,0.9); font-weight: 600; font-size: 14px; transition: 0.3s; }
     .nav-item:hover > a { color: var(--primary); }
 
-    /* 下拉菜单 */
     .dropdown-menu {
       position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
       background: var(--white); min-width: 240px; border-radius: 12px;
@@ -44,36 +45,57 @@
     .dropdown-menu a { display: block; padding: 12px 20px; color: var(--dark); font-size: 13px; font-weight: 600; border-bottom: 1px solid #f1f5f9; }
     .dropdown-menu a:hover { background: #f8fafc; color: var(--primary); padding-left: 25px; }
 
-    .btn-quote { background: var(--primary); color: #022c22; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; border: none; transition: 0.3s; }
+    .btn-quote { background: var(--primary); color: #022c22; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; border: none; transition: 0.3s; z-index: 5001; }
+
+    /* --- 移动端导航响应式 --- */
+    @media (max-width: 992px) {
+      .menu-toggle { display: block; }
+      .nav-links {
+        position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; 
+        background: #0f172a; flex-direction: column; justify-content: center;
+        transition: var(--transition); box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+        padding: 80px 40px; align-items: flex-start; gap: 20px;
+      }
+      .nav-links.active { right: 0; }
+      .nav-item { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .nav-item > a { font-size: 18px; display: block; width: 100%; padding: 15px 0; }
+      .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; background: transparent; box-shadow: none; display: none; }
+      .nav-item.active .dropdown-menu { display: block; }
+      .dropdown-menu a { color: rgba(255,255,255,0.7); border: none; padding: 10px 0; }
+      .btn-quote { display: none; }
+    }
 
     /* --- Sections Style --- */
-    section { padding: 100px 0 60px; }
+    section { padding: 80px 0 40px; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    .section-header { text-align: center; margin-bottom: 60px; }
-    .section-title { font-size: 38px; font-weight: 800; color: var(--dark); position: relative; display: inline-block; padding-bottom: 15px; }
+    .section-header { text-align: center; margin-bottom: 50px; }
+    .section-title { font-size: 32px; font-weight: 800; color: var(--dark); position: relative; display: inline-block; padding-bottom: 15px; }
     .section-title span { color: var(--primary); }
-    .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 4px; background: var(--primary); border-radius: 2px; }
+    .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--primary); border-radius: 2px; }
 
-    /* --- Certifications (还原滚动动画) --- */
-    .cert-scroll-container { width: 100%; overflow: hidden; background: #fff; padding: 40px 0; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
-    .cert-wrapper { display: flex; width: calc(280px * 16); animation: scrollCert 35s linear infinite; }
-    .cert-slide { width: 280px; padding: 0 20px; flex-shrink: 0; }
-    .cert-slide img { width: 100%; height: 180px; object-fit: contain; border: 1px solid #eee; border-radius: 8px; padding: 10px; }
-    @keyframes scrollCert { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-280px * 8)); } }
+    /* --- Certifications --- */
+    .cert-scroll-container { width: 100%; overflow: hidden; background: #fff; padding: 30px 0; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
+    .cert-wrapper { display: flex; width: calc(240px * 16); animation: scrollCert 30s linear infinite; }
+    .cert-slide { width: 240px; padding: 0 15px; flex-shrink: 0; }
+    .cert-slide img { width: 100%; height: 150px; object-fit: contain; border: 1px solid #eee; border-radius: 8px; padding: 8px; }
+    @keyframes scrollCert { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-240px * 8)); } }
 
-    /* --- Testimonials (还原卡片样式) --- */
-    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-    .testimonial-card { background: var(--white); padding: 30px; border-radius: 24px; border: 1px solid rgba(0,0,0,0.03); display: flex; flex-direction: column; transition: var(--transition); }
-    .testimonial-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-    .testimonial-image { width: 100%; height: 200px; border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+    /* --- Testimonials --- */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+    .testimonial-card { background: var(--white); padding: 25px; border-radius: 20px; border: 1px solid rgba(0,0,0,0.03); display: flex; flex-direction: column; transition: var(--transition); }
+    .testimonial-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+    .testimonial-image { width: 100%; height: 180px; border-radius: 12px; overflow: hidden; margin-bottom: 15px; }
     .testimonial-image img { width: 100%; height: 100%; object-fit: cover; }
-    .stars { color: #f59e0b; margin-bottom: 15px; font-size: 14px; }
-    .client-info { margin-top: auto; padding-top: 15px; border-top: 1px solid #f1f5f9; }
+    .stars { color: #f59e0b; margin-bottom: 12px; font-size: 13px; }
+    .testimonial-card p { font-size: 14px; color: var(--text); font-style: italic; margin-bottom: 15px; }
+    .client-info { margin-top: auto; padding-top: 12px; border-top: 1px solid #f1f5f9; }
+    .client-info h4 { margin: 0; font-size: 15px; color: var(--dark); }
+    .client-info small { color: var(--text-light); }
 
     @media (max-width: 1024px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 768px) { .testimonials-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .testimonials-grid { grid-template-columns: 1fr; } .section-title { font-size: 26px; } }
 
-    footer { padding: 60px 0; background: var(--dark); color: white; text-align: center; }
+    footer { padding: 40px 0; background: var(--dark); color: white; text-align: center; }
   </style>
 </head>
 <body>
@@ -81,11 +103,16 @@
   <nav class="navbar">
     <div class="nav-content">
       <div class="logo"><i class="fa-solid fa-solar-panel" style="color:var(--primary)"></i> LVSUNEX</div>
-      <div class="nav-links">
+      
+      <div class="menu-toggle" id="mobile-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+
+      <div class="nav-links" id="nav-menu">
         <div class="nav-item"><a href="index.html">Home</a></div>
         <div class="nav-item"><a href="index.html#company">Company</a></div>
-        <div class="nav-item">
-          <a href="products.html">Products <i class="fa-solid fa-chevron-down" style="font-size:10px"></i></a>
+        <div class="nav-item has-dropdown">
+          <a href="javascript:void(0)">Products <i class="fa-solid fa-chevron-down" style="font-size:10px"></i></a>
           <div class="dropdown-menu">
             <a href="products.html?type=basic">Basic Solar Freezer</a>
             <a href="products.html?type=update">Upgraded Solar Freezer</a>
@@ -101,7 +128,7 @@
     </div>
   </nav>
 
-  <section id="certifications" style="padding-top: 140px;">
+  <section id="certifications" style="padding-top: 120px;">
     <div class="container">
       <div class="section-header"><h2 class="section-title">Factory <span>Certifications</span></h2></div>
       <div class="cert-scroll-container">
@@ -158,5 +185,26 @@
     <p>&copy; 2026 LVSUNEX Solar. All Rights Reserved.</p>
   </footer>
 
+  <script>
+    // 1. 汉堡键开关逻辑
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    mobileToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const icon = mobileToggle.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-xmark');
+    });
+
+    // 2. 移动端下拉菜单
+    document.querySelectorAll('.has-dropdown').forEach(item => {
+      item.addEventListener('click', function() {
+        if (window.innerWidth <= 992) {
+          this.classList.toggle('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
