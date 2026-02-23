@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LVSUNEX | Home - Professional DC Solar Freezer Manufacturer</title>
+  <title>LVSUNEX | Professional DC Solar Freezer Manufacturer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
@@ -13,169 +13,147 @@
       --primary: #22c55e;
       --primary-dark: #16a34a;
       --dark: #0f172a;
-      --light: #f8fafc;
+      --white: #ffffff;
       --text: #334155;
       --text-light: #64748b;
-      --white: #ffffff;
       --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background-color: var(--light); color: var(--text); line-height: 1.6; }
+    body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: var(--text); line-height: 1.6; }
     a { text-decoration: none; color: inherit; }
 
-    /* --- Navbar 核心修复：电脑端绝对居中 --- */
-    .navbar { position: fixed; top: 0; width: 100%; z-index: 9999; padding: 18px 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .nav-content { display: flex; align-items: center; justify-content: space-between; max-width: 1400px; margin: 0 auto; padding: 0 25px; position: relative; }
-    
-    .logo { font-size: 26px; font-weight: 800; color: var(--white); letter-spacing: -1px; z-index: 10001; }
+    /* --- Navbar: 电脑横排 + 手机汉堡键 --- */
+    .navbar { position: fixed; top: 0; width: 100%; z-index: 9999; padding: 18px 0; background: rgba(15, 23, 42, 0.96); backdrop-filter: blur(10px); }
+    .nav-content { display: flex; align-items: center; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 20px; position: relative; }
+    .logo { font-size: 24px; font-weight: 800; color: #fff; z-index: 10001; }
 
-    /* 电脑端导航文字：强制绝对居中 */
-    .nav-links { 
-      display: flex; gap: 35px; align-items: center; 
-      position: absolute; left: 50%; transform: translateX(-50%); 
-      transition: var(--transition);
-    }
-    .nav-item { position: relative; }
-    .nav-item > a { color: rgba(255,255,255,0.9); font-weight: 600; font-size: 14px; transition: 0.3s; white-space: nowrap; }
+    .nav-links { display: flex; gap: 30px; align-items: center; position: absolute; left: 50%; transform: translateX(-50%); }
+    .nav-item { position: relative; padding: 10px 0; }
+    .nav-item > a { color: rgba(255,255,255,0.9); font-weight: 600; font-size: 14px; transition: 0.3s; display: flex; align-items: center; gap: 5px; }
     .nav-item:hover > a { color: var(--primary); }
 
-    /* 电脑端自动下拉菜单 */
     .dropdown-menu {
-      position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(15px);
+      position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
       background: var(--white); min-width: 220px; border-radius: 12px; padding: 10px 0;
       box-shadow: 0 15px 40px rgba(0,0,0,0.15); opacity: 0; visibility: hidden; transition: 0.3s;
     }
     .nav-item:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
-    .dropdown-menu a { display: block; padding: 10px 20px; color: var(--dark); font-size: 13px; font-weight: 600; border-bottom: 1px solid #f1f5f9; }
+    .dropdown-menu a { display: block; padding: 12px 20px; color: var(--dark); font-size: 13px; font-weight: 600; border-bottom: 1px solid #f1f5f9; }
     .dropdown-menu a:hover { background: #f8fafc; color: var(--primary); }
 
-    .btn-whatsapp { background: var(--primary); color: #022c22 !important; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; z-index: 10001; }
+    .menu-toggle { display: none; color: white; font-size: 26px; cursor: pointer; z-index: 10001; }
+    .menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9998; }
 
-    /* 手机端 3条杠 开关 */
-    .menu-toggle { display: none; color: white; font-size: 28px; cursor: pointer; z-index: 10001; }
-
-    /* --- 手机端响应式布局 --- */
-    @media (max-width: 1024px) {
-      .menu-toggle { display: block; }
-      .nav-links { 
-        position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; 
-        background: #0b1222; flex-direction: column; justify-content: center; 
-        left: auto; transform: none; box-shadow: -15px 0 40px rgba(0,0,0,0.6); 
-      }
-      .nav-links.active { right: 0; }
-      .nav-item { width: 100%; text-align: center; margin: 15px 0; }
-      .nav-item > a { font-size: 20px; padding: 10px; }
-      .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; display: none; background: rgba(255,255,255,0.05); width: 100%; box-shadow: none; }
-      .nav-item.open .dropdown-menu { display: block; }
-      .dropdown-menu a { color: rgba(255,255,255,0.7); font-size: 17px; border: none; }
-      .btn-whatsapp { display: none; } /* 手机端隐藏顶部按钮以防重叠 */
-    }
-
-    /* --- Company Section (完整扩充版内容) --- */
+    /* --- Company Section --- */
     section#company { padding: 120px 0; background: #fff; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    .company-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: flex-start; }
-    .company-content h2 { font-size: 38px; font-weight: 800; color: var(--dark); margin-bottom: 25px; }
-    .company-content h2 span { color: var(--primary); }
-    .company-content p { font-size: 16px; color: var(--text-light); margin-bottom: 18px; text-align: justify; }
-    
-    .stats-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0; }
-    .stat-item { border-left: 3px solid var(--primary); padding-left: 15px; }
-    .stat-item h4 { font-size: 24px; font-weight: 800; color: var(--dark); margin: 0; }
-    .stat-item p { font-size: 13px; color: var(--text-light); font-weight: 600; margin: 0; }
+    .about-wrapper { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: flex-start; margin-bottom: 80px; }
+    .about-text h2 { font-size: 42px; font-weight: 800; color: var(--dark); margin-bottom: 25px; line-height: 1.2; }
+    .about-text h2 span { color: var(--primary); }
+    .about-text p { font-size: 16px; color: var(--text-light); margin-bottom: 20px; text-align: justify; }
 
-    .visual-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    .visual-large { grid-column: span 2; height: 350px; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-    .visual-stack img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+    .stat-card { background: #f8fafc; padding: 20px; border-radius: 16px; border-left: 4px solid var(--primary); }
+    .stat-card h4 { font-size: 26px; font-weight: 800; color: var(--dark); margin: 0; }
 
-    .cert-heading { font-size: 38px; font-weight: 800; color: var(--primary); text-align: center; margin: 80px 0 40px; }
-    .cert-wrapper { display: flex; width: calc(250px * 16); animation: scrollCert 35s linear infinite; }
-    .cert-slide { width: 250px; padding: 0 15px; }
-    .cert-slide img { width: 100%; height: 160px; object-fit: contain; background: #fff; border: 1px solid #f1f5f9; border-radius: 12px; }
-    @keyframes scrollCert { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-250px * 8)); } }
+    .factory-display { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .factory-img-large { grid-column: span 2; height: 350px; border-radius: 24px; overflow: hidden; }
+    .factory-img-small { height: 200px; border-radius: 24px; overflow: hidden; }
+    .factory-display img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
 
+    /* --- Footer & 社交媒体动态效果 (核心补回) --- */
     footer { padding: 80px 0 40px; background: var(--dark); color: white; text-align: center; display: flex; flex-direction: column; align-items: center; }
-    .footer-logo { font-size: 32px; font-weight: 800; color: var(--primary); margin-bottom: 25px; display: block; }
-    .social-icons { display: flex; gap: 20px; justify-content: center; margin-bottom: 30px; }
-    .social-link { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white !important; font-size: 22px; transition: 0.3s; }
-    .menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; z-index: 9998; }
-    .menu-overlay.active { display: block; }
+    .footer-logo { font-size: 32px; font-weight: 800; color: var(--primary); margin-bottom: 25px; }
+    
+    .social-icons { display: flex; gap: 20px; margin-bottom: 30px; }
+    .social-link { 
+      width: 55px; height: 55px; border-radius: 50%; 
+      display: flex; align-items: center; justify-content: center; 
+      color: white !important; font-size: 24px; 
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+      background: rgba(255,255,255,0.08); 
+    }
+
+    /* 悬停跳动与旋转效果 */
+    .social-link:hover { 
+      transform: translateY(-10px) rotate(360deg); 
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    /* 品牌专属颜色 */
+    .brand-fb:hover { background-color: #1877F2; }
+    .brand-ins:hover { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+    .brand-tk:hover { background-color: #000; border: 1px solid #fff; }
+
+    @media (max-width: 1024px) {
+      .menu-toggle { display: block; }
+      .nav-links { position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background: var(--dark); flex-direction: column; padding: 100px 0; transition: 0.4s; z-index: 10000; }
+      .nav-links.active { right: 0; }
+      .menu-overlay.active { display: block; }
+      .about-wrapper { grid-template-columns: 1fr; }
+      .nav-item { width: 100%; text-align: center; }
+      .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; background: rgba(255,255,255,0.05); display: none; width: 100%; }
+      .nav-item.open .dropdown-menu { display: block; }
+    }
   </style>
 </head>
 <body>
 
   <nav class="navbar">
     <div class="nav-content">
-      <div class="logo">LVSUNEX</div>
-      
+      <a href="index.html" class="logo">LVSUNEX</a>
       <div class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></div>
-
       <div class="nav-links" id="navLinks">
         <div class="nav-item"><a href="index.html">Home</a></div>
         <div class="nav-item"><a href="#company">Company</a></div>
-        <div class="nav-item has-dropdown">
-          <a href="javascript:void(0)" id="productBtn">Products <i class="fa-solid fa-chevron-down" style="font-size:10px; margin-left:5px;"></i></a>
+        <div class="nav-item" id="productItem">
+          <a href="javascript:void(0)" id="productBtn">Products <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
           <div class="dropdown-menu">
             <a href="products.html">All Products</a>
-            <a href="products.html?type=basic">Basic Freezer</a>
-            <a href="products.html?type=update">Upgraded Freezer</a>
+            <a href="products.html?type=basic">Basic Solar Freezer</a>
+            <a href="products.html?type=update">Upgraded Solar Freezer</a>
+            <a href="products.html?type=aio">All-in-One Solar Freezer</a>
+            <a href="products.html?type=upright">Upright Solar Freezer</a>
             <a href="products.html?type=fridge">Solar Refrigerator</a>
           </div>
         </div>
         <div class="nav-item"><a href="feedback.html">Feedback</a></div>
         <div class="nav-item"><a href="contact.html">Contact</a></div>
       </div>
-
-      <a href="https://wa.me/8613566349436" class="btn-whatsapp" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      <a href="https://wa.me/8613566349436" style="background:var(--primary); color:#022c22; padding:10px 24px; border-radius:50px; font-weight:700;" class="desktop-only">WhatsApp</a>
     </div>
   </nav>
+
   <div class="menu-overlay" id="menuOverlay"></div>
 
-  <header style="height: 85vh; width: 100%; position: relative; display: flex; align-items: center; justify-content: center; background: #000;">
+  <header style="height: 80vh; background: #000; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff;">
     <img src="images/banner-1.jpg" style="position: absolute; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5);">
-    <div style="position: relative; text-align: center; color: #fff; z-index: 10; width: 90%;">
+    <div style="position: relative; z-index: 10; padding: 0 20px;">
       <h1 style="font-size: clamp(32px, 5vw, 60px); font-weight: 800; margin-bottom: 20px;">Global Source for Premium DC Solar Freezers</h1>
-      <p style="font-size: 18px; opacity: 0.9;">Direct Factory Supply Exporting Since 2015</p>
+      <p style="font-size: 18px; opacity: 0.8;">Professional Factory Supplying 50+ Countries Since 2015</p>
     </div>
   </header>
 
   <section id="company">
     <div class="container">
-      <div class="company-grid">
-        <div class="company-content">
+      <div class="about-wrapper">
+        <div class="about-text">
           <h2>About <span>LVSUNEX Solar</span></h2>
           <p><strong>Excellence in DC Solar Cooling Solutions.</strong></p>
-          <p>Established in 2015, LVSUNEX Solar is a professional high-tech enterprise dedicated to the research, development, and manufacturing of high-performance <strong>12V/24V DC solar freezers</strong> and refrigerators. Strategically located in the port city of Ningbo, China, we deliver sustainable cooling solutions worldwide.</p>
-          
-          <p>Our factory is equipped with advanced automated assembly lines and rigorous testing chambers. Every LVSUNEX unit undergoes 100% performance testing in <strong>extreme ambient temperatures (up to 43°C)</strong> to ensure uncompromised cooling performance in tropical and off-grid environments across Africa, Southeast Asia, and the Middle East.</p>
-          
-          <p>At LVSUNEX, we believe in <strong>Technology for Life</strong>. By integrating the latest high-efficiency DC compressors and thick-density insulation technology, our products achieve the perfect balance between low power consumption and rapid freezing, providing essential food and medical security for communities without stable grid access.</p>
-
-          <div class="stats-bar">
-            <div class="stat-item"><h4>10+</h4><p>Years Exp.</p></div>
-            <div class="stat-item"><h4>50+</h4><p>Countries</p></div>
-            <div class="stat-item"><h4>24/7</h4><p>Support</p></div>
+          <p>Established in 2015, LVSUNEX Solar is a professional high-tech enterprise dedicated to the R&D and manufacturing of high-performance <strong>12V/24V DC solar freezers</strong>. Based in Ningbo, China, we deliver sustainable cooling solutions to over 50 countries worldwide.</p>
+          <p>Every unit undergoes 100% performance testing in <strong>extreme ambient temperatures (up to 43°C)</strong> to ensure uncompromised cooling in tropical environments. We provide comprehensive <strong>OEM/ODM services</strong> and 24/7 technical support.</p>
+          <div class="stats-grid">
+            <div class="stat-card"><h4>10+</h4><p>Years Experience</p></div>
+            <div class="stat-card"><h4>50+</h4><p>Export Countries</p></div>
+            <div class="stat-card"><h4>24/7</h4><p>Technical Support</p></div>
           </div>
-
-          <p>Beyond manufacturing, we offer comprehensive <strong>OEM/ODM services</strong> and 24/7 technical support. With over a decade of export experience, LVSUNEX has become a trusted partner for international distributors, NGOs, and government energy projects.</p>
         </div>
-
-        <div class="visual-stack">
-          <div class="visual-large"><img src="images/factory-1.jpg"></div>
-          <div class="visual-small"><img src="images/factory-2.jpg"></div>
-          <div class="visual-small"><img src="images/factory-3.jpg"></div>
+        <div class="factory-display">
+          <div class="factory-img-large"><img src="images/factory-1.jpg"></div>
+          <div class="factory-img-small"><img src="images/factory-2.jpg"></div>
+          <div class="factory-img-small"><img src="images/factory-3.jpg"></div>
         </div>
-      </div>
-      
-      <h2 class="cert-heading">Factory Certifications</h2>
-      <div class="cert-wrapper">
-        <div class="cert-slide"><img src="images/cert-1.jpg"></div>
-        <div class="cert-slide"><img src="images/cert-2.jpg"></div>
-        <div class="cert-slide"><img src="images/cert-3.jpg"></div>
-        <div class="cert-slide"><img src="images/cert-4.jpg"></div>
-        <div class="cert-slide"><img src="images/cert-1.jpg"></div>
-        <div class="cert-slide"><img src="images/cert-2.jpg"></div>
       </div>
     </div>
   </section>
@@ -183,11 +161,11 @@
   <footer>
     <div class="footer-logo">LVSUNEX</div>
     <div class="social-icons">
-      <a href="#" class="social-link" style="background:#1877f2"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" class="social-link" style="background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 90%)"><i class="fab fa-instagram"></i></a>
-      <a href="https://tiktok.com/@bahir9422" class="social-link" style="background:#000; border:1px solid #444"><i class="fab fa-tiktok"></i></a>
+      <a href="#" class="social-link brand-fb"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="social-link brand-ins"><i class="fab fa-instagram"></i></a>
+      <a href="https://tiktok.com/@bahir9422" class="social-link brand-tk"><i class="fab fa-tiktok"></i></a>
     </div>
-    <p style="opacity:0.4; font-size:12px;">&copy; 2026 LVSUNEX Solar. All Rights Reserved.</p>
+    <p style="opacity: 0.5; font-size: 13px;">&copy; 2026 LVSUNEX Solar. All Rights Reserved.</p>
   </footer>
 
   <script>
@@ -195,7 +173,7 @@
     const navLinks = document.getElementById('navLinks');
     const menuOverlay = document.getElementById('menuOverlay');
     const productBtn = document.getElementById('productBtn');
-    const productParent = document.querySelector('.has-dropdown');
+    const productItem = document.getElementById('productItem');
 
     menuToggle.addEventListener('click', () => {
       navLinks.classList.toggle('active');
@@ -214,7 +192,7 @@
     productBtn.addEventListener('click', (e) => {
       if (window.innerWidth <= 1024) {
         e.preventDefault();
-        productParent.classList.toggle('open');
+        productItem.classList.toggle('open');
       }
     });
   </script>
