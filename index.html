@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LVSUNEX | Global Factory Exporter - Premium DC Solar Freezer & Refrigerator</title>
+  <title>LVSUNEX | Home - Premium DC Solar Freezer & Refrigerator</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
@@ -30,10 +30,9 @@
     .navbar { position: fixed; top: 0; width: 100%; z-index: 5000; padding: 18px 0; transition: var(--transition); background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
     .navbar.scrolled { background: rgba(15, 23, 42, 0.98); padding: 12px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
     .nav-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    .logo { font-size: 24px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 10px; z-index: 5001; }
-    
+    .logo { font-size: 24px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 10px; }
     .nav-links { display: flex; gap: 30px; align-items: center; }
-    .nav-item { position: relative; padding: 10px 0; cursor: pointer; }
+    .nav-item { position: relative; padding: 10px 0; }
     .nav-item > a { color: rgba(255,255,255,0.9); font-weight: 600; font-size: 14px; transition: 0.3s; }
     .nav-item:hover > a { color: var(--primary); }
 
@@ -44,170 +43,70 @@
       transition: all 0.3s ease; padding: 10px 0; z-index: 9999;
     }
     .nav-item:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
-    .dropdown-menu a { display: block; padding: 12px 20px; color: var(--dark); font-size: 13px; font-weight: 600; border-bottom: 1px solid #f1f5f9; transition: 0.2s; }
+    .dropdown-menu a { display: block; padding: 12px 20px; color: var(--dark); font-size: 13px; font-weight: 600; border-bottom: 1px solid #f1f5f9; }
     .dropdown-menu a:hover { background: #f8fafc; color: var(--primary); padding-left: 25px; }
 
-    .btn-quote { background: var(--primary); color: #022c22; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; transition: 0.3s; }
+    .btn-quote { background: var(--primary); color: #022c22; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
     .btn-quote:hover { transform: scale(1.05); background: var(--primary-dark); }
 
-    .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 5001; padding: 5px; }
-    .menu-toggle span { width: 28px; height: 3px; background: var(--white); border-radius: 2px; transition: 0.3s; transform-origin: center; }
-    .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-    .menu-toggle.active span:nth-child(2) { opacity: 0; }
-    .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
-
-    /* --- Hero Image & Entry Animation (Modified) --- */
+    /* --- Hero Slider --- */
     .hero-slider { height: 90vh; width: 100%; position: relative; overflow: hidden; background: #000; }
-    
-    .hero-images { position: absolute; width: 100%; height: 100%; z-index: 1; }
-    
-    /* 核心动画：图片缩放并变亮 */
-    .hero-img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-      object-position: center;
-      animation: heroReveal 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    }
-    
-    @keyframes heroReveal {
-      0% { transform: scale(1.2); filter: brightness(0); }
-      100% { transform: scale(1); filter: brightness(0.7); }
-    }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; animation: heroReveal 2s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    @keyframes heroReveal { 0% { transform: scale(1.2); filter: brightness(0); } 100% { transform: scale(1); filter: brightness(0.7); } }
+    .slide-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4; text-align: center; color: #fff; width: 90%; }
+    .slide-content h1 { font-size: clamp(28px, 6vw, 64px); font-weight: 800; margin-bottom: 20px; opacity: 0; transform: translateY(40px); animation: textUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.8s forwards; }
+    .slide-content p { font-size: clamp(16px, 2.5vw, 22px); opacity: 0; transform: translateY(30px); animation: textUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) 1.1s forwards; }
+    @keyframes textUp { to { opacity: 1; transform: translateY(0); } }
 
-    .slide-overlay { position: absolute; width: 100%; height: 100%; z-index: 3; background: rgba(0,0,0,0.3); }
-    
-    .slide-content { 
-      position: absolute; 
-      top: 50%; 
-      left: 50%; 
-      transform: translate(-50%, -50%); 
-      z-index: 4; 
-      text-align: center; 
-      color: #fff; 
-      width: 90%; 
-      pointer-events: none; 
-    }
-
-    /* 核心动画：文字上浮出场 */
-    .slide-content h1 { 
-      font-size: clamp(28px, 6vw, 64px); 
-      font-weight: 800; 
-      text-shadow: 0 4px 15px rgba(0,0,0,0.6); 
-      margin-bottom: 20px;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: textUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.8s forwards;
-    }
-    
-    .slide-content p { 
-      font-size: clamp(16px, 2.5vw, 22px); 
-      opacity: 0; 
-      transform: translateY(30px);
-      animation: textUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) 1.1s forwards;
-    }
-
-    @keyframes textUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* --- Company Design --- */
-    .company-profile { text-align: center; max-width: 950px; margin: 0 auto 50px; }
-    .company-profile p { font-size: 1.1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 20px; }
-    .factory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 40px 0; }
-    .factory-item { border-radius: 16px; overflow: hidden; height: 280px; background: #eee; box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: var(--transition); }
-    .factory-item:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.12); }
-    .factory-item img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; transition: transform 0.8s ease; }
-    .factory-item:hover img { transform: scale(1.1); }
-
-    /* --- Feature Card 翻转效果 --- */
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
-    .feature-card { background: var(--white); padding: 40px 30px; border-radius: 24px; text-align: center; border: 1px solid rgba(0,0,0,0.04); transition: var(--transition); perspective: 1000px; }
-    .feature-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-    .feature-icon { 
-      width: 70px; height: 70px; background: rgba(34, 197, 94, 0.08); 
-      color: var(--primary); border-radius: 50%; display: flex; 
-      align-items: center; justify-content: center; font-size: 28px; 
-      margin: 0 auto 20px; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
-    }
-    .feature-card:hover .feature-icon { transform: rotateY(360deg); background: var(--primary); color: white; }
-
-    /* --- Products --- */
+    /* --- Company Section --- */
     section { padding: 80px 0; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
     .section-header { text-align: center; margin-bottom: 60px; }
-    .section-title { font-size: 38px; font-weight: 800; color: var(--dark); letter-spacing: -1px; position: relative; display: inline-block; padding-bottom: 15px; }
-    .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 4px; background: var(--primary); border-radius: 2px; }
+    .section-title { font-size: 38px; font-weight: 800; color: var(--dark); position: relative; display: inline-block; padding-bottom: 15px; letter-spacing: -1px; }
     .section-title span { color: var(--primary); }
+    .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 4px; background: var(--primary); }
 
-    .filter-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 50px; }
-    .tab-btn { background: #fff; border: 1.5px solid #e2e8f0; padding: 12px 28px; border-radius: 50px; font-weight: 600; cursor: pointer; color: var(--text-light); transition: 0.3s; }
-    .tab-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; box-shadow: 0 10px 15px rgba(34, 197, 94, 0.2); }
-
-    .product-category-title { font-size: 24px; font-weight: 700; margin: 60px 0 30px; padding-left: 15px; border-left: 5px solid var(--primary); color: var(--dark); }
-    .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-bottom: 60px; }
+    .company-profile { text-align: center; max-width: 950px; margin: 0 auto; }
+    .company-profile p { font-size: 1.1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 20px; }
     
-    .product-card { background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; display: flex; flex-direction: column; transition: var(--transition); }
-    .product-card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-    .product-img-box { width: 100%; height: 220px; padding: 25px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .product-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.6s ease; }
-    .product-card:hover .product-img-box img { transform: scale(1.1); }
-    
-    .product-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; border-top: 1px solid #f8fafc; }
-    .product-title { color: var(--dark); font-weight: 700; margin-bottom: 8px; font-size: 17px; }
-    .product-spec { font-size: 12px; color: var(--text-light); line-height: 1.5; margin-bottom: 18px; flex-grow: 1; }
-    .btn-inquire { width: 100%; padding: 12px; border: 1.5px solid var(--primary); color: var(--primary); text-align: center; border-radius: 12px; font-weight: 700; transition: 0.3s; font-size: 14px; }
-    .btn-inquire:hover { background: var(--primary); color: #fff; }
+    .factory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0; }
+    .factory-item { border-radius: 16px; overflow: hidden; height: 280px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+    .factory-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; cursor: pointer; }
+    .factory-item:hover img { transform: scale(1.1); }
 
-    /* --- Feedback & Certs --- */
-    .cert-scroll-container { width: 100%; overflow: hidden; background: #fff; padding: 40px 0; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
-    .cert-wrapper { display: flex; width: calc(280px * 16); animation: scrollCert 35s linear infinite; }
-    .cert-slide { width: 280px; padding: 0 20px; flex-shrink: 0; }
-    .cert-slide img { width: 100%; height: 180px; object-fit: contain; border: 1px solid #eee; border-radius: 8px; padding: 10px; }
-    @keyframes scrollCert { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-280px * 8)); } }
-
-    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-    .testimonial-card { background: var(--white); padding: 30px; border-radius: 24px; border: 1px solid rgba(0,0,0,0.03); display: flex; flex-direction: column; }
-    .testimonial-image { width: 100%; height: 200px; border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
-    .testimonial-image img { width: 100%; height: 100%; object-fit: cover; }
-    .stars { color: #f59e0b; margin-bottom: 15px; font-size: 14px; }
-    .client-info { margin-top: auto; padding-top: 15px; border-top: 1px solid #f1f5f9; }
-
-    /* --- Contact & Footer --- */
-    .contact-form-card { max-width: 700px; margin: 0 auto; background: var(--white); padding: 45px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
-    .form-group { margin-bottom: 22px; text-align: left; }
-    .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--dark); font-size: 14px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-family: inherit; font-size: 14px; }
-
-    .footer-main { padding: 80px 0 30px; background: var(--dark); color: white; text-align: center; }
-    .footer-content { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-    .footer-logo { font-size: 28px; font-weight: 800; margin-bottom: 15px; color: var(--primary); }
-    .footer-contact-info { margin-bottom: 30px; color: rgba(255,255,255,0.7); font-size: 15px; }
-    .footer-contact-info p { margin: 8px 0; }
-    
-    .social-icons-container { display: flex; gap: 20px; justify-content: center; margin-bottom: 35px; }
-    .social-circle-link { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white !important; font-size: 22px; transition: var(--transition); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-    .social-circle-link:hover { transform: translateY(-8px) rotate(360deg); box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3); }
-    .brand-fb { background-color: #1877F2; }
-    .brand-ins { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285ae1 90%); }
-    .brand-tk { background-color: #000000; border: 1px solid rgba(255,255,255,0.2); }
-    .footer-copy { color: rgba(255,255,255,0.2); font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 25px; }
-
-    /* --- Responsive --- */
-    @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(2, 1fr); } .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 768px) {
-      .menu-toggle { display: flex; }
-      .navbar .desktop-only { display: none; }
-      .nav-links { position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; background: var(--dark); flex-direction: column; padding: 100px 40px; transition: 0.4s ease; z-index: 5002; }
-      .nav-links.active { right: 0; }
-      .dropdown-menu { position: static; opacity: 1; visibility: visible; transform: none; background: rgba(255,255,255,0.05); display: none; margin-top: 10px; }
-      .dropdown-menu a { color: white; }
-      .nav-item.open .dropdown-menu { display: block; }
-      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    /* 指定工厂证书标题样式 - 与 About Our Company 一致 */
+    .cert-heading {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -1px;
+      margin: 60px 0 30px;
+      text-align: center;
     }
 
-    .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 3000; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-    .img-modal { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; cursor: zoom-out; }
+    /* --- Certifications Scroll --- */
+    .cert-scroll-container { width: 100%; overflow: hidden; background: #fff; padding: 30px 0; margin-bottom: 60px; border-radius: 16px; }
+    .cert-wrapper { display: flex; width: calc(280px * 16); animation: scrollCert 35s linear infinite; }
+    .cert-slide { width: 280px; padding: 0 20px; flex-shrink: 0; }
+    .cert-slide img { width: 100%; height: 150px; object-fit: contain; border: 1px solid #eee; border-radius: 8px; padding: 10px; background: white; }
+    @keyframes scrollCert { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-280px * 8)); } }
+
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; margin-top: 40px; }
+    .feature-card { background: var(--white); padding: 40px 30px; border-radius: 24px; text-align: center; border: 1px solid rgba(0,0,0,0.04); transition: var(--transition); }
+    .feature-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .feature-icon { width: 70px; height: 70px; background: rgba(34, 197, 94, 0.08); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 20px; transition: 0.6s; }
+    .feature-card:hover .feature-icon { transform: rotateY(360deg); background: var(--primary); color: white; }
+
+    /* --- Footer --- */
+    .footer-main { padding: 80px 0 30px; background: var(--dark); color: white; text-align: center; }
+    .social-icons-container { display: flex; gap: 20px; justify-content: center; margin-bottom: 35px; }
+    .social-circle-link { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white !important; font-size: 22px; transition: var(--transition); }
+    .social-circle-link:hover { transform: translateY(-8px) rotate(360deg); }
+    .brand-fb { background-color: #1877F2; }
+    .brand-ins { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285ae1 90%); }
+    .brand-tk { background-color: #000000; }
+
+    @media (max-width: 768px) { .factory-grid { grid-template-columns: 1fr; } .nav-links { display: none; } }
   </style>
 </head>
 <body>
@@ -215,33 +114,27 @@
   <nav class="navbar" id="navbar">
     <div class="nav-content">
       <div class="logo"><i class="fa-solid fa-solar-panel" style="color:var(--primary)"></i> LVSUNEX</div>
-      <div class="menu-toggle" id="mobile-toggle"><span></span><span></span><span></span></div>
-      <div class="nav-links" id="nav-links">
-        <div class="nav-item"><a href="#home">Home</a></div>
+      <div class="nav-links">
+        <div class="nav-item"><a href="index.html">Home</a></div>
         <div class="nav-item"><a href="#company">Company</a></div>
-        <div class="nav-item" id="product-dropdown-trigger">
-          <a href="javascript:void(0)">Products <i class="fa-solid fa-chevron-down" style="font-size:10px"></i></a>
+        <div class="nav-item">
+          <a href="products.html">Products <i class="fa-solid fa-chevron-down" style="font-size:10px"></i></a>
           <div class="dropdown-menu">
-            <a href="#products" onclick="filterAndScroll('basic')">Basic Solar Freezer</a>
-            <a href="#products" onclick="filterAndScroll('update')">Upgraded Solar Freezer</a>
-            <a href="#products" onclick="filterAndScroll('aio')">All-in-One Solar Freezer</a>
-            <a href="#products" onclick="filterAndScroll('upright')">Upright Solar Freezer</a>
-            <a href="#products" onclick="filterAndScroll('fridge')">Solar Refrigerator</a>
+            <a href="products.html?type=basic">Basic Solar Freezer</a>
+            <a href="products.html?type=update">Upgraded Solar Freezer</a>
+            <a href="products.html?type=aio">All-in-One Solar Freezer</a>
+            <a href="products.html?type=fridge">Solar Refrigerator</a>
           </div>
         </div>
-        <div class="nav-item"><a href="#feedback">Feedback</a></div>
-        <div class="nav-item"><a href="#contact">Contact</a></div>
-        <a href="https://wa.me/8613566349436" class="btn-quote mobile-quote" style="display:none;" target="_blank"><i class="fa-brands fa-whatsapp"></i> Get Quote</a>
+        <div class="nav-item"><a href="feedback.html">Feedback</a></div>
+        <div class="nav-item"><a href="contact.html">Contact</a></div>
       </div>
-      <a href="https://wa.me/8613566349436" class="btn-quote desktop-only" target="_blank"><i class="fa-brands fa-whatsapp"></i> Get Quote</a>
+      <a href="https://wa.me/8613566349436" class="btn-quote" target="_blank"><i class="fa-brands fa-whatsapp"></i> Get Quote</a>
     </div>
   </nav>
 
   <header id="home" class="hero-slider">
-    <div class="hero-images">
-      <img src="images/banner-1.jpg" class="hero-img" alt="LVSUNEX Solar">
-    </div>
-    <div class="slide-overlay"></div>
+    <img src="images/banner-1.jpg" class="hero-img" alt="LVSUNEX Solar">
     <div class="slide-content">
       <h1>Global Source for Premium DC Solar Freezers</h1>
       <p>Direct factory supply exporting to 50+ countries since 2015.</p>
@@ -253,145 +146,37 @@
       <div class="section-header"><h2 class="section-title">About Our <span>Company</span></h2></div>
       <div class="company-profile">
         <p><strong>LVSUNEX Solar: Your Global Partner in DC Solar Cooling Excellence</strong></p>
-        <p>Since 2015, LVSUNEX Solar has been a pioneer in manufacturing high-performance 12V/24V DC solar freezers and refrigerators. Based in Ningbo, China, we have evolved into a comprehensive industry leader integrating R&D, manufacturing, and global export.</p>
-        <p>We specialize in providing reliable off-grid cooling solutions for over 50 countries. Every LVSUNEX product features advanced DC inverter technology and superior insulation.</p>
+        <p>Since 2015, LVSUNEX Solar has been a pioneer in manufacturing high-performance 12V/24V DC solar freezers and refrigerators. Based in Ningbo, China, we integrate R&D, manufacturing, and global export.</p>
+        
         <div class="factory-grid">
-          <div class="factory-item"><img src="images/factory-1.jpg" onclick="zoomImage(this)"></div>
-          <div class="factory-item"><img src="images/factory-2.jpg" onclick="zoomImage(this)"></div>
-          <div class="factory-item"><img src="images/factory-3.jpg" onclick="zoomImage(this)"></div>
+          <div class="factory-item"><img src="images/factory-1.jpg"></div>
+          <div class="factory-item"><img src="images/factory-2.jpg"></div>
+          <div class="factory-item"><img src="images/factory-3.jpg"></div>
         </div>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-industry"></i></div><h3>Factory Direct</h3><p>Direct wholesale pricing from source.</p></div>
-        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-earth-americas"></i></div><h3>Global Export</h3><p>Serving Africa, SE Asia & Middle East.</p></div>
-        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-leaf"></i></div><h3>Eco-Efficient</h3><p>High-performance DC compressors.</p></div>
-        <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-headset"></i></div><h3>24/7 Support</h3><p>Professional technical guidance.</p></div>
-      </div>
-    </div>
-  </section>
 
-  <section id="products" style="background-color: #f8fafc;">
-    <div class="container">
-      <div class="section-header"><h2 class="section-title">Our <span>Solutions</span></h2></div>
-      <div class="filter-tabs">
-        <button class="tab-btn active" data-filter="all" onclick="filterProducts('all')">All Products</button>
-        <button class="tab-btn" data-filter="basic" onclick="filterProducts('basic')">Basic Solar Freezer</button>
-        <button class="tab-btn" data-filter="update" onclick="filterProducts('update')">Upgraded Solar Freezer</button>
-        <button class="tab-btn" data-filter="aio" onclick="filterProducts('aio')">All-in-One Solar Freezer</button>
-        <button class="tab-btn" data-filter="upright" onclick="filterProducts('upright')">Upright Solar Freezer</button>
-        <button class="tab-btn" data-filter="fridge" onclick="filterProducts('fridge')">Solar Refrigerator</button>
-      </div>
+        <h2 class="cert-heading">Factory Certifications</h2>
+        
+        <div class="cert-scroll-container">
+          <div class="cert-wrapper">
+            <div class="cert-slide"><img src="images/cert-1.jpg"></div>
+            <div class="cert-slide"><img src="images/cert-2.jpg"></div>
+            <div class="cert-slide"><img src="images/cert-3.jpg"></div>
+            <div class="cert-slide"><img src="images/cert-4.jpg"></div>
+            <div class="cert-slide"><img src="images/cert-1.jpg"></div>
+            <div class="cert-slide"><img src="images/cert-2.jpg"></div>
+            <div class="cert-slide"><img src="images/cert-3.jpg"></div>
+            <div class="cert-slide"><img src="images/cert-4.jpg"></div>
+            <div class="cert-slide"><img src="images/cert-1.jpg"></div>
+            <div class="cert-slide"><img src="images/cert-2.jpg"></div>
+          </div>
+        </div>
 
-      <div class="product-category-section" data-type="basic">
-        <div class="product-category-title">Classic Basic DC Solar Freezer</div>
-        <div class="products-grid">
-          <div class="product-card"><div class="product-img-box"><img src="./images/159L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>159L Solar Freezer</h3><p class="product-spec">12V/24V DC | -18℃ Deep Cooling.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/209L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>209L Solar Freezer</h3><p class="product-spec">12V/24V DC | Optimal for small families.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/259L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>259L Solar Freezer</h3><p class="product-spec">12V/24V DC | Commercial durability.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/309L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>309L Solar Freezer</h3><p class="product-spec">12V/24V DC | Max storage capacity.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+        <div class="features-grid">
+          <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-industry"></i></div><h3>Factory Direct</h3><p>Direct wholesale pricing from source.</p></div>
+          <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-earth-americas"></i></div><h3>Global Export</h3><p>Serving Africa, SE Asia & Middle East.</p></div>
+          <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-leaf"></i></div><h3>Eco-Efficient</h3><p>High-performance DC compressors.</p></div>
+          <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-headset"></i></div><h3>24/7 Support</h3><p>Professional technical guidance.</p></div>
         </div>
-      </div>
-
-      <div class="product-category-section" data-type="update">
-        <div class="product-category-title">Upgraded Version DC Solar Freezer</div>
-        <div class="products-grid">
-          <div class="product-card"><div class="product-img-box"><img src="./images/100L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>100L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | High-efficiency compressor.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/150L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>150L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Keeps frozen 48h.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/200L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>200L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | High-performance cooling.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/250L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>250L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Heavy-duty construction.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/300L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>300L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Precision control.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/350L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>350L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Rapid freezing.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-        </div>
-      </div>
-
-      <div class="product-category-section" data-type="aio">
-        <div class="product-category-title">All-in-One Solar Freezer (Built-in Battery)</div>
-        <div class="products-grid">
-          <div class="product-card"><div class="product-img-box"><img src="./images/aio100L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>100L All-in-One</h3><p class="product-spec">Built-in battery. Plug & play.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/aio-150L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>150L All-in-One</h3><p class="product-spec">Integrated controller.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/aio-200L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>200L All-in-One</h3><p class="product-spec">Autonomous cooling.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-        </div>
-      </div>
-
-      <div class="product-category-section" data-type="upright">
-        <div class="product-category-title">Upright DC Solar Freezer</div>
-        <div class="products-grid">
-          <div class="product-card"><div class="product-img-box"><img src="./images/75L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>75L Upright Freezer</h3><p class="product-spec">Space-saving pull-out drawers.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/180L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>180L Upright Freezer</h3><p class="product-spec">Multi-layer organization.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/198L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>198L Upright Freezer</h3><p class="product-spec">Efficient vertical storage.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-        </div>
-      </div>
-
-      <div class="product-category-section" data-type="fridge">
-        <div class="product-category-title">Solar Refrigerator</div>
-        <div class="products-grid">
-          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-88L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>88L Solar Fridge</h3><p class="product-spec">Single door with ice box.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-90L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>90L Solar Fridge</h3><p class="product-spec">Adjustable shelves.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-105L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>105L Solar Fridge</h3><p class="product-spec">Double door Top Freezer.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-180L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>180L Solar Fridge</h3><p class="product-spec">Family size cooling.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-          <div class="product-card"><div class="product-img-box"><img src="./images/fridge-213L.jpg" onclick="zoomImage(this)"></div><div class="product-info"><h3>213L Solar Fridge</h3><p class="product-spec">Luxury series compressor.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="certifications">
-    <div class="container">
-      <div class="section-header"><h2 class="section-title">Factory <span>Certifications</span></h2></div>
-      <div class="cert-scroll-container">
-        <div class="cert-wrapper">
-          <div class="cert-slide"><img src="images/cert-1.jpg"></div>
-          <div class="cert-slide"><img src="images/cert-2.jpg"></div>
-          <div class="cert-slide"><img src="images/cert-3.jpg"></div>
-          <div class="cert-slide"><img src="images/cert-4.jpg"></div>
-          <div class="cert-slide"><img src="images/cert-1.jpg"></div>
-          <div class="cert-slide"><img src="images/cert-2.jpg"></div>
-          <div class="cert-slide"><img src="images/cert-3.jpg"></div>
-          <div class="cert-slide"><img src="images/cert-4.jpg"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="feedback">
-    <div class="container">
-      <div class="section-header"><h2 class="section-title">Global <span>Feedback</span></h2></div>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="testimonial-image"><img src="./images/user-1.jpg" onerror="this.src='https://placehold.co/400x250?text=Dubai'"></div>
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p>"The 12V/24V DC efficiency is perfect for our off-grid home in Dubai."</p>
-          <div class="client-info"><h4>Ahmed H.</h4><small>Dubai, UAE</small></div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-image"><img src="./images/user-2.jpg" onerror="this.src='https://placehold.co/400x250?text=Nigeria'"></div>
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p>"Keeps ice frozen even in extreme heat in Lagos. Best quality factory."</p>
-          <div class="client-info"><h4>Kingsley O.</h4><small>Lagos, Nigeria</small></div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-image"><img src="./images/user-3.jpg" onerror="this.src='https://placehold.co/400x250?text=Kenya'"></div>
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p>"Quiet operation and handles voltage fluctuations perfectly."</p>
-          <div class="client-info"><h4>Samuel K.</h4><small>Nairobi, Kenya</small></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" style="background: var(--light);">
-    <div class="container">
-      <div class="section-header"><h2 class="section-title">Inquire <span>Now</span></h2></div>
-      <div class="contact-form-card">
-        <form action="https://formspree.io/f/meekwkkw" method="POST">
-          <input type="hidden" name="_next" value="https://www.lvsunexsolar.com">
-          <input type="hidden" name="_captcha" value="false">
-          <div class="form-group"><label>Full Name *</label><input type="text" name="name" required placeholder="Name or Company"></div>
-          <div class="form-group"><label>Email Address *</label><input type="email" name="email" required placeholder="email@example.com"></div>
-          <div class="form-group"><label>WhatsApp / Phone</label><input type="text" name="phone" placeholder="+86..."></div>
-          <div class="form-group"><label>Message *</label><textarea name="message" rows="5" required placeholder="Specify model and quantity..."></textarea></div>
-          <button type="submit" class="btn-quote" style="width:100%; justify-content:center; padding: 16px;">Send Message</button>
-        </form>
       </div>
     </div>
   </section>
@@ -399,98 +184,20 @@
   <footer class="footer-main">
     <div class="footer-content">
       <div class="footer-logo">LVSUNEX</div>
-      <div class="footer-contact-info">
-        <p><i class="fa-solid fa-phone"></i> +86 13566349436</p>
-        <p><i class="fa-solid fa-envelope"></i> williamlvsunexsolar@gmail.com</p>
-        <p><i class="fa-solid fa-location-dot"></i> Ningbo, China</p>
-      </div>
+      <p>Ningbo, China | +86 13566349436</p>
       <div class="social-icons-container">
-        <a href="https://www.facebook.com/share/1MYXoS5voB/?mibextid=wwXIfr" class="social-circle-link brand-fb" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/williamlvsunexsolar?igsh=dHhqemE0NWM5cjE5&utm_source=qr" class="social-circle-link brand-ins" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.tiktok.com/@bahir9422?_r=1&_t=ZS-93WsAwU16iz" class="social-circle-link brand-tk" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://facebook.com/..." class="social-circle-link brand-fb" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com/..." class="social-circle-link brand-ins" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://tiktok.com/..." class="social-circle-link brand-tk" target="_blank"><i class="fab fa-tiktok"></i></a>
       </div>
-      <div class="footer-copy">&copy; 2026 LVSUNEX Solar. All Rights Reserved.</div>
+      <p style="font-size: 13px; opacity: 0.3;">&copy; 2026 LVSUNEX Solar. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <div id="imgModal" class="img-modal" onclick="this.style.display='none'"><img id="modalImg" src=""></div>
-  <a href="https://wa.me/8613566349436" class="whatsapp-float" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-
   <script>
-    // 1. 滚动导航栏变色
-    window.addEventListener('scroll', () => { 
-        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); 
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
     });
-
-    const mobileToggle = document.getElementById('mobile-toggle');
-    const navLinks = document.getElementById('nav-links');
-
-  // 2. 点击汉堡键开关菜单
-    mobileToggle.addEventListener('click', (e) => { 
-        e.stopPropagation(); 
-        mobileToggle.classList.toggle('active'); 
-        navLinks.classList.toggle('active'); 
-        // 这行必须在大括号里面，才能每次点击都判断
-        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
-    });
-
-    // 3. 【核心修复】点击菜单外部自动收回
-    document.addEventListener('click', (e) => {
-        if (navLinks.classList.contains('active')) {
-            if (!navLinks.contains(e.target) && !mobileToggle.contains(e.target)) {
-                mobileToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-                // 也要加在这里，确保点外面收回后恢复滚动
-                document.body.style.overflow = 'auto';
-            }
-        }
-    });
-    // 4. 点击链接后自动关闭（适配 Products 下拉）
-    document.querySelectorAll('.nav-links a').forEach(link => { 
-        link.addEventListener('click', (e) => { 
-            if (window.innerWidth <= 768) { 
-                // 如果点的是 Products 这一项，我们让它切换显示下拉列表，不关闭整个菜单
-                if (link.parentElement.id === 'product-dropdown-trigger') { 
-                    link.parentElement.classList.toggle('open'); 
-                } else { 
-                    // 点 Home/Company/Contact 等普通链接，直接收回菜单
-                    mobileToggle.classList.remove('active'); 
-                    navLinks.classList.remove('active'); 
-                } 
-            } 
-        }); 
-    });
-
-    // 5. 产品筛选跳转
-    function filterAndScroll(type) { 
-        filterProducts(type); 
-        const productSection = document.querySelector('#products');
-        if (productSection) {
-            window.scrollTo({ top: productSection.offsetTop - 80, behavior: 'smooth' }); 
-        }
-        // 筛选后也自动收回菜单
-        if (window.innerWidth <= 768) {
-            mobileToggle.classList.remove('active');
-            navLinks.classList.remove('active');
-        }
-    }
-
-    // 6. 筛选逻辑
-    function filterProducts(type) { 
-        document.querySelectorAll('.tab-btn').forEach(btn => 
-            btn.classList.toggle('active', btn.getAttribute('data-filter') === type)
-        ); 
-        document.querySelectorAll('.product-category-section').forEach(sec => { 
-            sec.style.display = (type === 'all' || sec.getAttribute('data-type') === type) ? 'block' : 'none'; 
-        }); 
-    }
-
-    // 7. 图片放大
-    function zoomImage(el) { 
-        const img = el.querySelector('img') || el; 
-        document.getElementById('modalImg').src = img.src; 
-        document.getElementById('imgModal').style.display = "flex"; 
-    }
-</script>
+  </script>
 </body>
 </html>
