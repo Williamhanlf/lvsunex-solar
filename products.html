@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LVSUNEX | Products - Full Catalog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #22c55e;
+      --primary-dark: #16a34a;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --text: #334155;
+      --text-light: #64748b;
+      --white: #ffffff;
+      --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
+    body { font-family: 'Inter', sans-serif; background-color: var(--light); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+
+    /* --- Navbar --- */
+    .navbar { position: fixed; top: 0; width: 100%; z-index: 5000; padding: 18px 0; transition: var(--transition); background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .nav-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .logo { font-size: 24px; font-weight: 800; color: var(--white); display: flex; align-items: center; gap: 10px; }
+    .nav-links { display: flex; gap: 30px; align-items: center; }
+    .nav-item { position: relative; padding: 10px 0; cursor: pointer; }
+    .nav-item > a { color: rgba(255,255,255,0.9); font-weight: 600; font-size: 14px; transition: 0.3s; }
+    .nav-item:hover > a { color: var(--primary); }
+
+    .dropdown-menu {
+      position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
+      background: var(--white); min-width: 240px; border-radius: 12px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2); opacity: 0; visibility: hidden;
+      transition: all 0.3s ease; padding: 10px 0; z-index: 9999;
+    }
+    .nav-item:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu a { display: block; padding: 12px 20px; color: var(--dark); font-size: 13px; font-weight: 600; border-bottom: 1px solid #f1f5f9; }
+    .dropdown-menu a:hover { background: #f8fafc; color: var(--primary); padding-left: 25px; }
+
+    .btn-quote { background: var(--primary); color: #022c22; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; border: none; transition: 0.3s; }
+
+    /* --- Products Section --- */
+    section#products { padding: 120px 0 80px; background-color: #f8fafc; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-title { font-size: 38px; font-weight: 800; color: var(--dark); position: relative; display: inline-block; padding-bottom: 15px; }
+    .section-title span { color: var(--primary); }
+    .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 4px; background: var(--primary); border-radius: 2px; }
+
+    .filter-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 50px; }
+    .tab-btn { background: #fff; border: 1.5px solid #e2e8f0; padding: 12px 28px; border-radius: 50px; font-weight: 600; cursor: pointer; color: var(--text-light); transition: 0.3s; }
+    .tab-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; box-shadow: 0 10px 15px rgba(34, 197, 94, 0.2); }
+
+    .product-category-title { font-size: 24px; font-weight: 700; margin: 60px 0 30px; padding-left: 15px; border-left: 5px solid var(--primary); color: var(--dark); }
+    .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-bottom: 60px; }
+    
+    .product-card { 
+      background: #fff; border-radius: 24px; overflow: hidden; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; 
+      display: flex; flex-direction: column; transition: var(--transition);
+      height: 100%;
+    }
+    .product-card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    .product-img-box { width: 100%; height: 200px; padding: 20px; display: flex; align-items: center; justify-content: center; }
+    .product-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.6s ease; }
+    
+    .product-info { 
+      padding: 15px 20px 20px; flex-grow: 1; display: flex; 
+      flex-direction: column; border-top: 1px solid #f8fafc; 
+    }
+    .product-title { color: var(--dark); font-weight: 700; margin-bottom: 8px; font-size: 16px; }
+    .product-spec { font-size: 12px; color: var(--text-light); line-height: 1.4; margin-bottom: 15px; flex-grow: 1; }
+
+    /* 修复版按钮 */
+    .btn-inquire { 
+      width: 100%; padding: 8px 12px; border: 1.5px solid var(--primary); 
+      color: var(--primary); text-align: center; border-radius: 10px; 
+      font-weight: 700; transition: 0.3s; font-size: 13px; 
+      display: block; box-sizing: border-box; margin-top: auto; 
+    }
+    .btn-inquire:hover { background: var(--primary); color: #fff; }
+
+    @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+    footer { padding: 60px 0; background: var(--dark); color: white; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo"><i class="fa-solid fa-solar-panel" style="color:var(--primary)"></i> LVSUNEX</div>
+      <div class="nav-links">
+        <div class="nav-item"><a href="index.html">Home</a></div>
+        <div class="nav-item"><a href="index.html#company">Company</a></div>
+        <div class="nav-item">
+          <a href="products.html">Products <i class="fa-solid fa-chevron-down" style="font-size:10px"></i></a>
+          <div class="dropdown-menu">
+            <a href="products.html?type=basic">Basic Solar Freezer</a>
+            <a href="products.html?type=update">Upgraded Solar Freezer</a>
+            <a href="products.html?type=aio">All-in-One Solar Freezer</a>
+            <a href="products.html?type=upright">Upright Solar Freezer</a>
+            <a href="products.html?type=fridge">Solar Refrigerator</a>
+          </div>
+        </div>
+        <div class="nav-item"><a href="feedback.html">Feedback</a></div>
+        <div class="nav-item"><a href="contact.html">Contact</a></div>
+      </div>
+      <a href="https://wa.me/8613566349436" class="btn-quote" target="_blank"><i class="fa-brands fa-whatsapp"></i> Get Quote</a>
+    </div>
+  </nav>
+
+  <section id="products">
+    <div class="container">
+      <div class="section-header"><h2 class="section-title">Our <span>Solutions</span></h2></div>
+      
+      <div class="filter-tabs">
+        <button class="tab-btn active" data-filter="all" onclick="filterProducts('all')">All Products</button>
+        <button class="tab-btn" data-filter="basic" onclick="filterProducts('basic')">Basic Solar Freezer</button>
+        <button class="tab-btn" data-filter="update" onclick="filterProducts('update')">Upgraded Solar Freezer</button>
+        <button class="tab-btn" data-filter="aio" onclick="filterProducts('aio')">All-in-One Solar Freezer</button>
+        <button class="tab-btn" data-filter="upright" onclick="filterProducts('upright')">Upright Solar Freezer</button>
+        <button class="tab-btn" data-filter="fridge" onclick="filterProducts('fridge')">Solar Refrigerator</button>
+      </div>
+
+      <div class="product-category-section" data-type="basic">
+        <div class="product-category-title">Classic Basic DC Solar Freezer</div>
+        <div class="products-grid">
+          <div class="product-card"><div class="product-img-box"><img src="images/159L.jpg"></div><div class="product-info"><h3 class="product-title">159L Solar Freezer</h3><p class="product-spec">12V/24V DC | -18℃ Deep Cooling.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/209L.jpg"></div><div class="product-info"><h3 class="product-title">209L Solar Freezer</h3><p class="product-spec">12V/24V DC | Optimal for small families.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/259L.jpg"></div><div class="product-info"><h3 class="product-title">259L Solar Freezer</h3><p class="product-spec">12V/24V DC | Commercial durability.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/309L.jpg"></div><div class="product-info"><h3 class="product-title">309L Solar Freezer</h3><p class="product-spec">12V/24V DC | Max storage capacity.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+        </div>
+      </div>
+
+      <div class="product-category-section" data-type="update">
+        <div class="product-category-title">Upgraded Version DC Solar Freezer</div>
+        <div class="products-grid">
+          <div class="product-card"><div class="product-img-box"><img src="images/100L.jpg"></div><div class="product-info"><h3 class="product-title">100L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | High-efficiency compressor.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/150L.jpg"></div><div class="product-info"><h3 class="product-title">150L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Keeps frozen 48h.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/200L.jpg"></div><div class="product-info"><h3 class="product-title">200L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | High-performance cooling.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/250L.jpg"></div><div class="product-info"><h3 class="product-title">250L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Heavy-duty construction.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/300L.jpg"></div><div class="product-info"><h3 class="product-title">300L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Precision control.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/350L.jpg"></div><div class="product-info"><h3 class="product-title">350L Solar Freezer (Pro)</h3><p class="product-spec">12V/24V DC | Rapid freezing.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+        </div>
+      </div>
+
+      <div class="product-category-section" data-type="aio">
+        <div class="product-category-title">All-in-One Solar Freezer</div>
+        <div class="products-grid">
+          <div class="product-card"><div class="product-img-box"><img src="images/aio100L.jpg"></div><div class="product-info"><h3 class="product-title">100L All-in-One</h3><p class="product-spec">Built-in battery. Plug & play.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/aio-150L.jpg"></div><div class="product-info"><h3 class="product-title">150L All-in-One</h3><p class="product-spec">Integrated controller.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/aio-200L.jpg"></div><div class="product-info"><h3 class="product-title">200L All-in-One</h3><p class="product-spec">Autonomous cooling.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+        </div>
+      </div>
+
+      <div class="product-category-section" data-type="upright">
+        <div class="product-category-title">Upright DC Solar Freezer</div>
+        <div class="products-grid">
+          <div class="product-card"><div class="product-img-box"><img src="images/75L.jpg"></div><div class="product-info"><h3 class="product-title">75L Upright Freezer</h3><p class="product-spec">Space-saving pull-out drawers.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/180L.jpg"></div><div class="product-info"><h3 class="product-title">180L Upright Freezer</h3><p class="product-spec">Multi-layer organization.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/198L.jpg"></div><div class="product-info"><h3 class="product-title">198L Upright Freezer</h3><p class="product-spec">Efficient vertical storage.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+        </div>
+      </div>
+
+      <div class="product-category-section" data-type="fridge">
+        <div class="product-category-title">Solar Refrigerator</div>
+        <div class="products-grid">
+          <div class="product-card"><div class="product-img-box"><img src="images/fridge-88L.jpg"></div><div class="product-info"><h3 class="product-title">88L Solar Fridge</h3><p class="product-spec">Single door with ice box.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/fridge-90L.jpg"></div><div class="product-info"><h3 class="product-title">90L Solar Fridge</h3><p class="product-spec">Adjustable shelves.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/fridge-105L.jpg"></div><div class="product-info"><h3 class="product-title">105L Solar Fridge</h3><p class="product-spec">Double door Top Freezer.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/fridge-180L.jpg"></div><div class="product-info"><h3 class="product-title">180L Solar Fridge</h3><p class="product-spec">Family size cooling.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+          <div class="product-card"><div class="product-img-box"><img src="images/fridge-213L.jpg"></div><div class="product-info"><h3 class="product-title">213L Solar Fridge</h3><p class="product-spec">Luxury series compressor.</p><a href="https://wa.me/8613566349436" class="btn-inquire">Inquire</a></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding: 40px 0; background: var(--dark); color: white; text-align: center;">
+    <p>&copy; 2026 LVSUNEX Solar. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function filterProducts(type) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-filter') === type));
+      document.querySelectorAll('.product-category-section').forEach(sec => {
+        sec.style.display = (type === 'all' || sec.getAttribute('data-type') === type) ? 'block' : 'none';
+      });
+    }
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const type = urlParams.get('type') || 'all';
+      filterProducts(type);
+    }
+  </script>
+</body>
+</html>
